@@ -1,0 +1,87 @@
+/* Hero Section */
+.hero {
+    position: relative;
+    overflow: hidden;
+    height: 300px;
+    background-color: #111;
+}
+
+.hero .slideshow img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    animation: fade 10s infinite;
+}
+
+@keyframes fade {
+    0%, 100% {
+        opacity: 1;
+    }
+    50% {
+        opacity: 0;
+    }
+}
+
+/* Venue Description */
+.venue-description {
+    text-align: center;
+    padding: 20px;
+    background-color: #222;
+    color: gold;
+}
+
+.venue-description h2 {
+    color: red;
+    margin-bottom: 10px;
+}
+
+/* Upcoming Events */
+.upcoming-events {
+    padding: 20px;
+    background-color: black;
+    color: gold;
+}
+
+.upcoming-events h2 {
+    color: red;
+    margin-bottom: 15px;
+}
+
+.upcoming-events ul {
+    list-style: none;
+    padding: 0;
+}
+
+.upcoming-events ul li {
+    margin-bottom: 10px;
+    border-bottom: 1px solid gold;
+    padding-bottom: 10px;
+}
+
+/* Social Sharing */
+.social-sharing {
+    text-align: center;
+    padding: 20px;
+    background-color: #222;
+    color: gold;
+}
+
+.social-sharing h2 {
+    color: red;
+    margin-bottom: 10px;
+}
+
+.social-sharing .social-buttons a {
+    display: inline-block;
+    margin: 5px;
+    padding: 10px 15px;
+    background-color: red;
+    color: gold;
+    border-radius: 5px;
+    font-weight: bold;
+}
+
+.social-sharing .social-buttons a:hover {
+    background-color: gold;
+    color: black;
+}
