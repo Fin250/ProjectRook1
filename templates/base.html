@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    {% block meta_description %}
+    <meta name="description" content="Luna Moth offers menstrual awareness circles, yoga, and soulful support for women in Worthing and beyond." />
+    {% endblock %}
+
+    <!-- Open Graph -->
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="{{ request.url }}" />
+    <meta property="og:title" content="{% block og_title %}Luna Moth – Menstrual Awareness & Yoga{% endblock %}" />
+    <meta property="og:description" content="{% block og_description %}Luna Moth offers menstrual awareness circles, yoga, and soulful support for women in Worthing and beyond.{% endblock %}" />
+    <meta property="og:image" content="{{ url_for('static', filename='images/lunamothbackground.png', _external=True) }}" />
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="{% block twitter_title %}Luna Moth – Feminine Wisdom & Cyclical Living{% endblock %}" />
+    <meta name="twitter:description" content="{% block twitter_description %}Join a space of feminine renewal with menstrual circles, yoga, and tarot.{% endblock %}" />
+    <meta name="twitter:image" content="{{ url_for('static', filename='images/lunamothbackground.png', _external=True) }}" />
+    
+    <link rel="shortcut icon" type="image/x-icon" href="/static/images/favicon.ico"/>
+    <title>{% block title %}Luna Moth{% endblock %}</title>
+    <link rel="stylesheet" href="/static/format.css">
+</head>
+<body>
+
+    <!-- Header Section -->
+    <header class="header">
+        <div class="logo">
+            <img src="{{ url_for('static', filename='images/lmoth_small.png') }}" alt="Luna Moth Logo" width="50" height="50">
+        </div>
+        <h1>Luna Moth</h1>
+
+        <!-- Hamburger Button -->
+        <button class="hamburger" aria-label="Toggle navigation">
+            &#9776;
+        </button>
+
+        <nav>
+            <ul class="nav-links">
+                <li><a href="{{ url_for('home') }}" class="{% if request.path == url_for('home') %}active-link{% endif %}">Home</a></li>
+                <li class="divider">|</li>
+                <li><a href="{{ url_for('menopause_support') }}" class="{% if request.path == url_for('menopause_support') %}active-link{% endif %}">Menopause Support</a></li>
+                <li class="divider">|</li>
+                <li><a href="{{ url_for('menstrual_cycle_awareness') }}" class="{% if request.path == url_for('menstrual_cycle_awareness') %}active-link{% endif %}">Menstrual Cycle Awareness</a></li>
+                <li class="divider">|</li>
+                <li><a href="{{ url_for('yoga') }}" class="{% if request.path == url_for('yoga') %}active-link{% endif %}">Yoga</a></li>
+                <li class="divider">|</li>
+                <li><a href="{{ url_for('tarot') }}" class="{% if request.path == url_for('tarot') %}active-link{% endif %}">Tarot</a></li>
+                <li class="divider">|</li>
+                <li><a href="{{ url_for('about') }}" class="{% if request.path == url_for('about') %}active-link{% endif %}">About Me</a></li>
+                <li class="divider">|</li>
+                <li><a href="{{ url_for('blog') }}" class="{% if request.path == url_for('blog') %}active-link{% endif %}">Blog</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <!-- Main Content -->
+    <main>
+        {% block content %}{% endblock %}
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer" role="contentinfo">
+        <div class="footer-container">
+
+            <!-- Contact Section -->
+            <div class="footer-section">
+                <h3>Contact Me</h3>
+                <p>
+                    <img src="{{ url_for('static', filename='images/footer/email-icon.png') }}" alt="Email Icon" class="footer-icon">
+                    <a href="mailto:lisalunamoth@gmail.com" title="Email">lisalunamoth@gmail.com</a>
+                </p>
+                <p>
+                    <img src="{{ url_for('static', filename='images/footer/telephone-icon.png') }}" alt="Telephone Icon" class="footer-icon">
+                    <a href="tel:+07760 422080" title="Phone">07760 422080</a>
+                </p>
+            </div>
+
+            <!-- Events Section -->
+            <div class="footer-section">
+                <h3>Events</h3>
+                <p>
+                    <img src="{{ url_for('static', filename='images/footer/eventbrite-icon.png') }}" alt="Eventbrite Icon" class="footer-icon">
+                    <a href="https://www.eventbrite.co.uk/o/luna-moth-88736365703" title="Eventbrite" target="_blank">Luna Moth</a>
+                </p>
+                <p>
+                    <img src="{{ url_for('static', filename='images/footer/substack-icon.png') }}" alt="Blog Icon" class="footer-icon">
+                    <a href="{{ url_for('blog') }}" title="Blog">lisalunamoth</a>
+                </p>
+            </div>
+
+            <!-- Social Media Section -->
+            <div class="footer-section">
+                <h3>Follow Me</h3>
+                <p>
+                    <img src="{{ url_for('static', filename='images/footer/facebook-icon.png') }}" alt="Facebook Icon" class="footer-icon">
+                    <a href="https://facebook.com/profile.php?id=61552665437722" title="Facebook" target="_blank">@Luna Moth</a>
+                </p>
+                <p>
+                    <img src="{{ url_for('static', filename='images/footer/instagram-icon.png') }}" alt="Instagram Icon" class="footer-icon">
+                    <a href="https://www.instagram.com/lisalunamoth/" title="Instagram" target="_blank">@Lisalunamoth</a>
+                </p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+      const hamburger = document.querySelector('.hamburger');
+      const navLinks = document.querySelector('.nav-links');
+
+      hamburger.addEventListener('click', () => {
+        navLinks.classList.toggle('show');
+      });
+    </script>
+    
+</body>
+</html>
+

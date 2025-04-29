@@ -1,0 +1,166 @@
+{% extends "base.html" %}
+
+{% block title %}Home - Luna Moth{% endblock %}
+
+{% block meta_description %}
+<meta name="description" content="Luna Moth is a sanctuary for menstrual awareness, yoga, and soulful connection. Reclaim your rhythm in community." />
+{% endblock %}
+
+{% block og_title %}Luna Moth | Menstrual Wisdom & Yoga{% endblock %}
+{% block og_description %}A soulful space for menstrual awareness, yoga, and feminine connection in Worthing and beyond.{% endblock %}
+
+{% block twitter_title %}Luna Moth | Cyclical Living & Feminine Healing{% endblock %}
+{% block twitter_description %}Join the Luna Moth community—reclaim your cycle and live with intention.{% endblock %}
+
+
+{% block content %}
+<!-- Main Section: Introduction -->
+<section id="intro" class="intro-section">
+    <div class="intro-content">
+        <h1>Welcome to Luna Moth</h1>
+        <div class="intro-image-wrapper">
+        <img src="{{ url_for('static', filename='images/Compressed_Yoga.jpg') }}" alt="Yoga" class="intro-image" width="560" height="600">
+            </div>
+        <p>A warm welcome from Lisa at Luna Moth, your community face to face space
+            for transformation and healing. As a trained menstrual cycle awareness
+            mentor and facilitator with Red School, I’m offering a monthly 7 session
+            sequential course starting 2nd May 2025, with a taster on 4th April 2025.</p>
+        
+        <p>I’m a trained Red School menstruality mentor, having completed the Menstruality Leadership programme in 2022 and Menopause the Great Awakener trainings in 2023 and 2024.  I am an active voluntary contributor to their graduate online community. I’ve organised an in person regional meet up for graduates and participate in regular trainings and facilitation CPD. 
+</p>
+        
+        <p>I specialise in creating a serene environment where you can focus on growth and healing. Let’s work together to create positive change in your life.</p>
+    </div>
+</section>
+
+<!-- Services Section: 2x2 Grid -->
+<section id="services" class="services-section">
+    <h2>My Services</h2>
+    <div class="services-grid">
+        <!-- Menopause Support -->
+        <a href="{{ url_for('menopause_support') }}" class="service-link">
+            <div class="service-item">
+                <img src="{{ url_for('static', filename='images/Menopause_support.jpg') }}" alt="Menopause Support" class="service-image">
+                <h3>Menopause Support</h3>
+                <p>Offering personalized guidance and support to help navigate the physical and emotional challenges of menopause. Whether through one-on-one consultations or group workshops, I provide tools and techniques to empower you through this transition.</p>
+            </div>
+        </a>
+
+        <!-- Menstrual Cycle Awareness -->
+        <a href="{{ url_for('menstrual_cycle_awareness') }}" class="service-link">
+            <div class="service-item">
+                <img src="{{ url_for('static', filename='images/Events.jpg') }}" alt="Events" class="service-image">
+                <h3>Menstrual Cycle Awareness</h3>
+                <p>A face-to-face, intimate circle for women to deepen into menstruality and conscious menopause transition. Each session includes guided meditation and embodied reflection, supporting transformation, healing, and awareness.</p>
+            </div>
+        </a>
+
+        <!-- Yoga -->
+        <a href="{{ url_for('yoga') }}" class="service-link">
+            <div class="service-item">
+                <img src="{{ url_for('static', filename='images/Yoga_services.jpg') }}" alt="Yoga" class="service-image">
+                <h3>Menoyoga™</h3>
+                <p><strong>Yoga as a method to manage menopause:</strong> Following a 30-hour Menoyoga™ training, as an add-on to my existing long-term yoga practice, I can offer solar and lunar sequences specifically designed to balance the nervous system and develop strength.</p>
+            </div>
+        </a>
+
+        <!-- Tarot Reading -->
+        <a href="{{ url_for('tarot') }}" class="service-link">
+            <div class="service-item">
+                <img src="{{ url_for('static', filename='images/Tarot.jpg') }}" alt="Tarot Reading" class="service-image">
+                <h3>Tarot Reading</h3>
+                <p>Private face to face and online intuitive readings of up to 1 hour £30. If you refer a friend then any future readings for you are £25 by way of thank you.</p>
+            </div>
+        </a>
+    </div>
+</section>
+
+<!-- Testimonials Section -->
+<section id="testimonials" class="testimonials-section">
+    <h2>What My Clients Say</h2>
+
+    <div class="testimonial-container">
+        <div class="testimonial-carousel">
+            <div class="testimonials-wrapper">
+                <div class="testimonial-item">
+                    <p>"Lisa generously shares the fruits of her extensive and ongoing Red School training with the women she supports in her groups, retreats and drop-in sessions. She has a magical ability to hold space for women, and teaches authentically and from the heart. I've found her work around the inner critic and menstrual cycle awareness instrumental in helping my own menopause transition. If you're interested in learning more about how you can work with your cycle, not against it, Lisa is your girl!"</p>
+                    <p><strong>- Rachel Boon, BSc (Hons) Women's Health Specialist Naturopath & Herbalist in Worthing</strong></p>
+                </div>
+                <div class="testimonial-item">
+                    <p>"Everything I’ve done with Lisa has been both brilliant and insightful (tarot readings, menstrual cycle awareness, retreat day, circles).
+
+                    Lisa is extremely knowledgeable and full of wisdom (in general) but especially around how we can harness the power of our menstrual cycle and beyond, into menopause.
+
+                    She has a gentle intuitive way and holds space beautifully, making everything accessible - highly recommend."</p>
+                    <p><strong>- Lucy (Worthing)</strong></p>
+                </div>
+                <div class="testimonial-item">
+                    <p>"Empowering women through cycle awareness, self-care, and intuitive guidance.
+                    Lisa creates a safe, nurturing space for women to connect with their bodies and cycles. Her guidance in menstrual tracking has transformed my understanding of my emotions, relationships, and well-being. She’s helped me prepare for perimenopause with confidence and embrace my cycle as a source of wisdom. Every session is calming, insightful, and empowering—I highly recommend Lisa's Luna Moth Menstrual Cycle Awareness Course for any woman on this journey."</p>
+                    <p><strong>- Jenn T</strong></p>
+                </div>
+            </div>
+
+            <div class="carousel-controls">
+                <button class="carousel-btn prev" onclick="changeSlide(-1)">&#10094;</button>
+                <div class="carousel-dots" id="carousel-dots"></div>
+                <button class="carousel-btn next" onclick="changeSlide(1)">&#10095;</button>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Booking Section -->
+<section id="booking" class="booking-section">
+    <h2>✧◈ Book a Session ◈✧</h2>
+    <p>If you’re ready to get started or have any questions, please feel free to book a session with me using the link below.</p>
+    <a href="{{ url_for('menstrual_cycle_awareness') }}" class="btn-book">Book Now</a>
+</section>
+
+<script>
+    let currentSlide = 0;
+
+    const wrapper = document.querySelector('.testimonials-wrapper');
+    const items = document.querySelectorAll('.testimonial-item');
+    const dotsContainer = document.getElementById('carousel-dots');
+
+    function updateCarousel() {
+        wrapper.style.transform = `translateX(-${currentSlide * 100}%)`;
+
+        document.querySelectorAll('.carousel-dot').forEach((dot, index) => {
+            dot.classList.toggle('active', index === currentSlide);
+        });
+    }
+
+    function changeSlide(direction) {
+        const totalSlides = items.length;
+        currentSlide = (currentSlide + direction + totalSlides) % totalSlides;
+        updateCarousel();
+    }
+
+    // Create dots dynamically
+    items.forEach((_, index) => {
+        const dot = document.createElement('span');
+        dot.classList.add('carousel-dot');
+        if (index === 0) dot.classList.add('active');
+        dot.addEventListener('click', () => {
+            currentSlide = index;
+            updateCarousel();
+        });
+        dotsContainer.appendChild(dot);
+    });
+
+    // Optional swipe support for mobile
+    let startX = 0;
+    wrapper.addEventListener('touchstart', (e) => {
+        startX = e.touches[0].clientX;
+    });
+
+    wrapper.addEventListener('touchend', (e) => {
+        const endX = e.changedTouches[0].clientX;
+        if (startX - endX > 50) changeSlide(1);      // swipe left
+        else if (endX - startX > 50) changeSlide(-1); // swipe right
+    });
+</script>
+
+{% endblock %}
