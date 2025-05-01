@@ -2,7 +2,7 @@
 .hero {
     position: relative;
     overflow: hidden;
-    height: 300px;
+    height: 400px;
     background-color: #111;
 }
 
@@ -10,52 +10,107 @@
     width: 100%;
     height: 100%;
     object-fit: cover;
-    animation: fade 10s infinite;
-}
-
-@keyframes fade {
-    0%, 100% {
-        opacity: 1;
-    }
-    50% {
-        opacity: 0;
-    }
 }
 
 /* Venue Description */
 .venue-description {
     text-align: center;
-    padding: 20px;
+    padding: 40px 20px;
     background-color: #222;
     color: gold;
 }
 
 .venue-description h2 {
     color: red;
-    margin-bottom: 10px;
+    margin-bottom: 20px;
+    font-size: 2rem;
 }
 
 /* Upcoming Events */
 .upcoming-events {
-    padding: 20px;
+    padding: 40px 20px;
     background-color: black;
     color: gold;
 }
 
 .upcoming-events h2 {
     color: red;
+    margin-bottom: 30px;
+    text-align: center;
+    font-size: 2rem;
+}
+
+.events-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 20px;
+}
+
+.event-card {
+    background-color: #222;
+    border: 1px solid gold;
+    border-radius: 10px;
+    overflow: hidden;
+    text-align: center;
+    color: gold;
+    transition: transform 0.3s ease;
+}
+
+.event-card:hover {
+    transform: scale(1.05);
+}
+
+.event-card img {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+}
+
+.event-details {
+    padding: 20px;
+}
+
+.event-details h3 {
+    color: red;
+    margin-bottom: 10px;
+    font-size: 1.5rem;
+}
+
+.event-details p {
     margin-bottom: 15px;
 }
 
-.upcoming-events ul {
-    list-style: none;
-    padding: 0;
+.event-details .social-sharing {
+    margin-top: 10px;
 }
 
-.upcoming-events ul li {
+.event-details .social-sharing p {
     margin-bottom: 10px;
-    border-bottom: 1px solid gold;
-    padding-bottom: 10px;
+    font-size: 0.9rem;
+    color: gold;
+}
+
+.event-details .social-sharing a img {
+    width: 25px;
+    height: 25px;
+    margin: 0 5px;
+    vertical-align: middle;
+}
+
+.share-button {
+    background-color: red;
+    color: gold;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.share-button:hover {
+    background-color: gold;
+    color: black;
 }
 
 /* Social Sharing */

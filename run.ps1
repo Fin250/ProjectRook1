@@ -12,7 +12,7 @@ Start-Process "http://127.0.0.1:5000"
 Write-Host "Flask server starting..."
 
 # Run Flask app
-flask run
+python main.py
 
 # After server stops
 Write-Host "Server stopped. Press any key to close..."

@@ -46,25 +46,30 @@
     <footer>
         <div class="footer-section">
             <h4>Venue Info</h4>
-            <p>BuNker11<br>123 Music Lane<br>City, State, ZIP</p>
+            <p>BuNker11<br>54-60 Heene Rd<br>Worthing, West Sussex, BN11 3RG</p>
         </div>
         <div class="footer-section">
             <h4>TOT Social Media</h4>
             <ul>
-                <li><a href="https://facebook.com" target="_blank">Facebook</a></li>
-                <li><a href="https://instagram.com" target="_blank">Instagram</a></li>
-                <li><a href="https://youtube.com" target="_blank">YouTube</a></li>
+                <li><a href="https://facebook.com" target="_blank"><img src="{{ url_for('static', filename='images/footer/facebook-icon.png') }}" alt="Facebook">Facebook</a></li>
+                <li><a href="https://instagram.com" target="_blank"><img src="{{ url_for('static', filename='images/footer/instagram-icon.png') }}" alt="Instagram">Instagram</a></li>
+                <li><a href="https://youtube.com" target="_blank"><img src="{{ url_for('static', filename='images/footer/youtube-icon.png') }}" alt="YouTube">Youtube</a></li>
             </ul>
         </div>
         <div class="footer-section">
             <h4>Hammerdown Social Media</h4>
             <ul>
-                <li><a href="https://facebook.com" target="_blank">Facebook</a></li>
-                <li><a href="https://instagram.com" target="_blank">Instagram</a></li>
+                <li><a href="https://facebook.com" target="_blank"><img src="{{ url_for('static', filename='images/footer/facebook-icon.png') }}" alt="Facebook">Facebook</a></li>
+                <li><a href="https://instagram.com" target="_blank"><img src="{{ url_for('static', filename='images/footer/instagram-icon.png') }}" alt="Instagram">Instagram</a></li>
             </ul>
         </div>
     </footer>
 
-    <script src="{{ url_for('static', filename='js/scripts.js') }}"></script>
+    <!-- General JavaScript -->
+    <script src="{{ url_for('static', filename='scripts/base.js') }}"></script>
+
+    <!-- Page-specific JavaScript -->
+    {% block extra_js %}
+    {% endblock %}
 </body>
 </html>
