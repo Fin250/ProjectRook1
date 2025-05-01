@@ -3,7 +3,8 @@ body {
     margin: 0;
     padding: 0;
     font-family: 'Roboto', sans-serif;
-    background-color: #0d0d0d; /* Darker black for a modern look */
+    background: url('../images/placeholders/placeholder5.jpg') no-repeat center center fixed;
+    background-size: cover;
     color: #f5c518; /* Gold with a softer tone */
     line-height: 1.6;
 }
@@ -17,6 +18,16 @@ a:hover {
     text-decoration: underline;
 }
 
+/* Main Content Wrapper */
+main {
+    max-width: 80%;
+    margin: 0 auto;
+    background-color: #0d0d0d; /* Solid black background for content */
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5); /* Subtle shadow for depth */
+}
+
 /* Header Styles */
 header {
     display: flex;
@@ -25,6 +36,7 @@ header {
     padding: 15px 30px;
     background-color: #1a1a1a; /* Dark gray for contrast */
     border-bottom: 3px solid #f5c518; /* Gold border */
+    border-radius: 10px;
 }
 
 header .logo img {
@@ -170,63 +182,128 @@ header nav ul li a:hover {
 
 /* Footer Styles */
 footer {
+    display: flex;
+    flex-direction: column; /* Stack sections vertically */
+    align-items: center;
     background-color: #1a1a1a;
     color: #f5c518;
-    padding: 30px;
-    display: flex;
-    justify-content: space-between;
-    flex-wrap: wrap;
+    padding: 15px; /* Adjust padding */
     border-top: 3px solid #f5c518;
+    border-radius: 10px;
+    overflow: hidden; /* Prevent content from overflowing */
 }
 
 footer .footer-section {
-    margin: 10px;
-    flex: 1;
-    min-width: 200px;
+    width: 100%; /* Make sections take full width */
+    text-align: center; /* Center-align content */
+    margin: 10px 0; /* Add vertical spacing */
+}
+
+footer .footer-section.address {
+    margin-bottom: 15px; /* Add extra spacing below the address */
 }
 
 footer .footer-section h4 {
     color: #e63946;
-    margin-bottom: 15px;
-    font-size: 1.2rem;
+    margin-bottom: 5px; /* Reduce spacing */
+    font-size: 0.9rem; /* Adjust font size */
 }
 
-footer .footer-detail {
-    text-align: center;
-    margin-top: 20px;
-    color: #f5c518;
-    font-size: 0.9rem;
-}
-
-/* Footer Social Media Logos */
 footer .footer-section ul {
     list-style: none;
     padding: 0;
     display: flex;
-    gap: 10px;
+    justify-content: center; /* Center-align social media icons */
+    gap: 10px; /* Add spacing between icons */
+}
+
+footer .footer-section ul li a {
+    color: #f5c518;
+    font-size: 0.7rem; /* Adjust text size */
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    gap: 5px; /* Space between icon and text */
 }
 
 footer .footer-section ul li a img {
-    width: 25px;
-    height: 25px;
-    margin-right: 5px;
-    vertical-align: middle;
+    width: 20px; /* Adjust icon size */
+    height: 20px;
     transition: transform 0.3s ease;
 }
 
 footer .footer-section ul li a img:hover {
-    transform: scale(1.2); /* Slight zoom effect on hover */
+    transform: scale(1.1); /* Slight zoom effect on hover */
 }
 
 /* Responsive Design */
 @media (max-width: 768px) {
+    /* Header Navigation */
     header nav ul {
-        flex-direction: column;
+        flex-direction: row; /* Keep the navigation horizontal */
+        flex-wrap: wrap; /* Allow wrapping if needed */
+        justify-content: center; /* Center the navigation items */
+        gap: 5px; /* Reduce the gap between items */
+    }
+
+    header nav ul li a {
+        font-size: 0.7rem; /* Further reduce font size for smaller screens */
+        padding: 5px 8px; /* Adjust padding for smaller buttons */
+    }
+
+    header {
+        padding: 8px 10px; /* Reduce header padding */
+    }
+
+    header .logo img {
+        max-height: 35px; /* Further reduce logo size */
+    }
+
+    /* Footer */
+    footer {
+        flex-direction: column; /* Stack sections vertically */
         align-items: center;
     }
 
-    footer {
-        flex-direction: column;
-        align-items: center;
+    footer .footer-section.address {
+        width: 100%; /* Address section takes full width */
+        margin-bottom: 20px; /* Add extra spacing below the address */
+    }
+
+    footer .footer-section {
+        width: 100%; /* Ensure sections take full width */
+        margin: 10px 0; /* Add vertical spacing */
+    }
+
+    footer .footer-section ul {
+        flex-direction: row; /* Keep social media icons horizontal */
+        justify-content: center; /* Center-align icons */
+    }
+
+    footer .footer-section ul li a {
+        font-size: 0.6rem; /* Further reduce text size */
+        gap: 3px; /* Reduce space between icon and text */
+    }
+
+    footer .footer-section ul li a img {
+        width: 16px; /* Reduce icon size */
+        height: 16px;
+    }
+
+    footer .footer-section h4 {
+        font-size: 0.8rem; /* Reduce header size */
+    }
+
+    /* Shortened Address */
+    footer .footer-section p {
+        display: none; /* Hide full address by default */
+    }
+
+    footer .footer-section p.short {
+        display: block; /* Show shortened address */
+    }
+
+    main, header, footer {
+        max-width: 95%; /* Reduce width for smaller screens */
     }
 }
