@@ -6,6 +6,8 @@ from flask import (
     url_for,
     flash,
 )
+
+from datetime import datetime
 from werkzeug.utils import secure_filename
 import os
 
@@ -18,14 +20,27 @@ app.config["ALLOWED_EXTENSIONS"] = {"png", "jpg", "jpeg", "gif"}
 def allowed_file(filename):
     return "." in filename and filename.rsplit(".", 1)[1].lower() in app.config["ALLOWED_EXTENSIONS"]
 
+def format_date_with_ordinal(date):
+    day = date.day
+    if 11 <= day <= 13:  # Special case for 11th, 12th, 13th
+        suffix = "th"
+    else:
+        suffix = {1: "st", 2: "nd", 3: "rd"}.get(day % 10, "th")
+    return date.strftime(f"{day}{suffix} %B %Y")
+
 # Routes
 @app.route("/")
 def home():
     gigs = [
-        {"date": "2023-11-01", "venue": "The Underground", "city": "New York"},
-        {"date": "2023-11-15", "venue": "Rock Arena", "city": "Los Angeles"},
-        {"date": "2023-12-05", "venue": "Metal Hall", "city": "Chicago"},
+        {"date": datetime.strptime("2025-11-01 20:00", "%Y-%m-%d %H:%M"), "name": "Michael Jackson playing Thriller"},
+        {"date": datetime.strptime("2025-11-15 20:00", "%Y-%m-%d %H:%M"), "name": "Mother playing Barcelona World Cup"},
+        {"date": datetime.strptime("2025-12-05 20:00", "%Y-%m-%d %H:%M"), "name": "Sylva lost the tap again"},
     ]
+
+    # Format the date with the ordinal suffix
+    for gig in gigs:
+        gig["formatted_date"] = format_date_with_ordinal(gig["date"])
+
     return render_template("home.html", gigs=gigs)
 
 @app.route("/admin", methods=["GET", "POST"])
