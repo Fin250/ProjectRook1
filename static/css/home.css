@@ -7,9 +7,23 @@
 }
 
 .hero .slideshow img {
+    position: absolute;
     width: 100%;
     height: 100%;
     object-fit: cover;
+    opacity: 0;
+    transition: opacity 1s ease-in-out;
+}
+
+.hero .slideshow {
+    position: relative;
+    width: 100%;
+    height: 100%;
+}
+
+.hero .slideshow img.active {
+    opacity: 1;
+    z-index: 1;
 }
 
 /* Venue Description */
@@ -48,55 +62,70 @@
     padding: 20px;
 }
 
+/* Event Card */
 .event-card {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 450px; /* Fixed height for consistent layout */
     background-color: #1a1a1a;
-    border: 1px solid #d4af37; /* Softer golden border */
+    border: 1px solid #d4af37;
     border-radius: 5px;
     overflow: hidden;
-    position: relative; /* Enable positioning for child elements */
     text-align: center;
-    color: #d4af37; /* Softer golden text */
+    color: #d4af37;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-    display: flex;
-    flex-direction: column; /* Stack content vertically */
-    justify-content: space-between; /* Push content to top and bottom */
-    height: 450px; /* Increase height to accommodate square image */
+    padding: 5px; /* Add padding around the card content */
 }
 
+/* Event Image */
 .event-image {
-    width: calc(100% - 10px); /* Add margin inside the card */
-    height: 250px; /* Make the image square */
-    object-fit: cover;
-    margin: 5px; /* Add a small margin around the image */
-    border-radius: 3px;
+    width: calc(100% - 10px); /* Adjust width to account for padding */
+    height: auto; /* Remove fixed height */
+    aspect-ratio: 1.5 / 1; /* Ensure the height matches the width */
+    object-fit: cover; /* Maintain aspect ratio and cover the area */
+    margin: 0 auto; /* Center the image within the card */
+    border-radius: 5px; /* Optional: Add rounded corners to the image */
+    margin-top: 2.5px;
 }
 
+/* Event Details */
 .event-details {
-    padding: 10px; /* Reduce padding to minimize gaps */
-    flex-grow: 1; /* Allow this section to take up remaining space */
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
+    flex-grow: 1; /* Allow dynamic spacing */
+    padding: 10px;
 }
 
+/* Event Title */
 .event-title {
-    font-size: 1.2rem;
+    font-family: 'Metal Mania', cursive; /* Apply Metal Mania font */
+    font-size: 1.4rem;
     font-weight: bold;
-    margin: 5px 0; /* Reduce gap between the title and the image */
-    color: #e63946; /* Highlighted red for the title */
+    margin: 5px 0;
+    color: #e63946;
     transition: color 0.3s ease;
 }
 
 .event-card:hover .event-title {
-    color: #b22222; /* Darker red on hover */
-    text-decoration: underline;
+    color: #b22222;
+    text-decoration: underline; /* Always underlined */
 }
 
-.event-divider {
-    border: 0;
-    height: 1px;
-    background: #d4af37; /* Softer golden divider */
-    margin: 5px 0; /* Reduce gap between the title and the divider */
+/* Spacer */
+.spacer {
+    flex-grow: 0.5; /* Reduced size to make it about half as big */
+}
+
+/* Event Datetime */
+.event-datetime {
+    font-size: 1rem;
+    color: #d4af37;
+    margin: 10px 0;
+    text-align: center;
+    border-top: 1px solid #d4af37; /* Divider above datetime */
+    padding-top: 10px;
 }
 
 /* Bottom Section */
@@ -105,12 +134,8 @@
     justify-content: space-between;
     align-items: center;
     padding: 10px;
-    background-color: #1a1a1a; /* Match card background */
-    border-top: 1px solid #f5c518; /* Add a subtle border */
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    right: 0;
+    background-color: #1a1a1a;
+    border-top: 1px solid #d4af37; /* Longer divider */
 }
 
 .event-date-text {
@@ -155,6 +180,10 @@
 .share-button img {
     width: 20px;
     height: 20px;
+}
+
+.share-button:hover {
+    transform: scale(1.1);
 }
 
 .share-button:hover .share-tooltip {

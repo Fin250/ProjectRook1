@@ -4,6 +4,9 @@
 
 {% block extra_css %}
 <link rel="stylesheet" href="{{ url_for('static', filename='css/home.css') }}">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Metal+Mania&display=swap" rel="stylesheet">
 {% endblock %}
 
 {% block content %}
@@ -18,7 +21,7 @@
 
 <section class="venue-description">
     <h2>Welcome to BuNker11</h2>
-    <p>BuNker11 (BN11) is your go-to venue for live music, gigs, and unforgettable performances. Located in the heart of the city, we host monthly gigs featuring top artists and bands. Stay tuned for upcoming events and explore our past performances.</p>
+    <p>BuNker11 (BN11) is your go-to venue for live music, gigs, and unforgettable performances. Located in the basement of the Charles Dickens pub, we host monthly gigs featuring unique artists and bands. Stay tuned for upcoming events and explore our past performances.</p>
 </section>
 
 <section class="upcoming-events">
@@ -26,21 +29,20 @@
     <div class="events-grid">
         {% for gig in gigs %}
         <div class="event-card">
-            <img src="{{ url_for('static', filename='images/event_placeholder.png') }}" alt="Event Image" class="event-image">
+            <img src="{{ url_for('static', filename='images/placeholders/placeholder' + (loop.index % 3 + 2)|string + '.jpg') }}" alt="Event Image" class="event-image">
             <div class="event-details">
                 <h3 class="event-title">{{ gig.name }}</h3>
-                <hr class="event-divider">
-                <p class="event-time">{{ gig.date.strftime('%I:%M %p').lstrip('0') }}</p> <!-- Time in 12-hour format -->
-                <p class="event-date-text">{{ gig.formatted_date }}</p> <!-- Full date without time -->
-                <div class="event-bottom">
-                    <div class="event-countdown">
-                        <span class="countdown-text" data-date="{{ gig.date }}"></span>
-                    </div>
-                    <button class="share-button">
-                        <img src="{{ url_for('static', filename='images/share-icon.png') }}" alt="Share Icon">
-                        <span class="share-tooltip">Share</span>
-                    </button>
+                <div class="spacer"></div> <!-- Dynamic spacer for title -->
+            </div>
+            <p class="event-datetime">{{ gig.date.strftime('%I:%M %p').lstrip('0') }} - {{ gig.formatted_date }}</p>
+            <div class="event-bottom">
+                <div class="event-countdown">
+                    <span class="countdown-text" data-date="{{ gig.date }}"></span>
                 </div>
+                <button class="share-button">
+                    <img src="{{ url_for('static', filename='images/share-icon.png') }}" alt="Share Icon">
+                    <span class="share-tooltip">Share</span>
+                </button>
             </div>
         </div>
         {% endfor %}

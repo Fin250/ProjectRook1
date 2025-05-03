@@ -32,9 +32,9 @@ def format_date_with_ordinal(date):
 @app.route("/")
 def home():
     gigs = [
-        {"date": datetime.strptime("2025-11-01 20:00", "%Y-%m-%d %H:%M"), "name": "Michael Jackson playing Thriller"},
-        {"date": datetime.strptime("2025-11-15 20:00", "%Y-%m-%d %H:%M"), "name": "Mother playing Barcelona World Cup"},
-        {"date": datetime.strptime("2025-12-05 20:00", "%Y-%m-%d %H:%M"), "name": "Sylva lost the tap again"},
+        {"date": datetime.strptime("2025-06-01 20:00", "%Y-%m-%d %H:%M"), "name": "NOTHING BUT A GOOD TIME: THE ROCK ANTHEMS SHOW"},
+        {"date": datetime.strptime("2025-06-05 21:00", "%Y-%m-%d %H:%M"), "name": "RAMMLIED x ROBBED ZOMBIE"},
+        {"date": datetime.strptime("2025-06-15 20:00", "%Y-%m-%d %H:%M"), "name": "SPACE: BLOOD & BUBBLEGUM TOUR"},
     ]
 
     # Format the date with the ordinal suffix
