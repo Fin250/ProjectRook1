@@ -35,6 +35,9 @@ def home():
         {"date": datetime.strptime("2025-06-01 20:00", "%Y-%m-%d %H:%M"), "name": "NOTHING BUT A GOOD TIME: THE ROCK ANTHEMS SHOW"},
         {"date": datetime.strptime("2025-06-05 21:00", "%Y-%m-%d %H:%M"), "name": "RAMMLIED x ROBBED ZOMBIE"},
         {"date": datetime.strptime("2025-06-15 20:00", "%Y-%m-%d %H:%M"), "name": "SPACE: BLOOD & BUBBLEGUM TOUR"},
+        {"date": datetime.strptime("2025-06-25 20:00", "%Y-%m-%d %H:%M"), "name": "THE COPOLICE"},
+        {"date": datetime.strptime("2025-07-03 21:30", "%Y-%m-%d %H:%M"), "name": "UK SUBS + GUITAR GANGSTERS"},
+        {"date": datetime.strptime("2025-07-16 20:30", "%Y-%m-%d %H:%M"), "name": "PUNK NIGHT: HUNG LIKE HANRATTY + CREDENTIALS + RADIOACTIVE DECAY"},
     ]
 
     # Format the date with the ordinal suffix
