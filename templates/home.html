@@ -13,9 +13,11 @@
 <section class="hero">
     <div class="slideshow">
         <!-- Example slideshow images -->
-        <img src="{{ url_for('static', filename='images/slideshow1.jpg') }}" alt="Slideshow Image 1">
-        <img src="{{ url_for('static', filename='images/slideshow2.jpg') }}" alt="Slideshow Image 2">
-        <img src="{{ url_for('static', filename='images/slideshow3.jpg') }}" alt="Slideshow Image 3">
+        <img src="{{ url_for('static', filename='images/slideshow/slideshow1.jpg') }}" alt="Slideshow Image 1">
+        <img src="{{ url_for('static', filename='images/slideshow/slideshow2.jpg') }}" alt="Slideshow Image 2">
+        <img src="{{ url_for('static', filename='images/slideshow/slideshow3.jpg') }}" alt="Slideshow Image 3">
+        <img src="{{ url_for('static', filename='images/slideshow/slideshow4.jpg') }}" alt="Slideshow Image 4">
+        <img src="{{ url_for('static', filename='images/slideshow/slideshow5.jpg') }}" alt="Slideshow Image 5">
     </div>
 </section>
 
@@ -32,7 +34,7 @@
             <img src="{{ url_for('static', filename='images/placeholders/placeholder' + (loop.index % 3 + 2)|string + '.jpg') }}" alt="Event Image" class="event-image">
             <div class="event-details">
                 <h3 class="event-title">{{ gig.name }}</h3>
-                <div class="spacer"></div> <!-- Dynamic spacer for title -->
+                <div class="spacer"></div>
             </div>
             <p class="event-datetime">{{ gig.date.strftime('%I:%M %p').lstrip('0') }} - {{ gig.formatted_date }}</p>
             <div class="event-bottom">
@@ -40,7 +42,7 @@
                     <span class="countdown-text" data-date="{{ gig.date }}"></span>
                 </div>
                 <button class="share-button">
-                    <img src="{{ url_for('static', filename='images/share-icon.png') }}" alt="Share Icon">
+                    <img src="{{ url_for('static', filename='images/icons/share-icon.png') }}" alt="Share Icon">
                     <span class="share-tooltip">Share</span>
                 </button>
             </div>

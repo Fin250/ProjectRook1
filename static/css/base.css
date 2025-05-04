@@ -3,14 +3,14 @@ body {
     margin: 0;
     padding: 0;
     font-family: 'Roboto', sans-serif;
-    background: url('../images/placeholders/placeholder5.jpg') no-repeat center center fixed;
+    background: url('../images/background1.jpg') no-repeat center center fixed;
     background-size: cover;
-    color: #d4af37; /* Gold with a softer tone */
+    color: #d4af37;
     line-height: 1.6;
 }
 
 a {
-    color: #e63946; /* Soft red for links */
+    color: #e63946;
     text-decoration: none;
 }
 
@@ -22,10 +22,10 @@ a:hover {
 main {
     max-width: 80%;
     margin: 0 auto;
-    background-color: #0d0d0d; /* Solid black background for content */
+    background-color: #0d0d0d;
     padding: 20px;
     border-radius: 10px;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5); /* Subtle shadow for depth */
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
 }
 
 /* Header Styles */
@@ -33,14 +33,14 @@ header {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 15px 30px;
-    background-color: #1a1a1a; /* Dark gray for contrast */
-    border-bottom: 3px solid #f5c518; /* Gold border */
+    padding: 10px 30px;
+    background-color: #1a1a1a;
+    border-bottom: 3px solid #f5c518;
     border-radius: 10px;
 }
 
 header .logo img {
-    max-height: 60px;
+    max-height: 80px;
 }
 
 header nav ul {
@@ -56,7 +56,7 @@ header nav ul li {
 }
 
 header nav ul li a {
-    color: #f5c518; /* Gold for text */
+    color: #faa400;
     font-weight: bold;
     padding: 10px 15px;
     border-radius: 5px;
@@ -64,154 +64,154 @@ header nav ul li a {
 }
 
 header nav ul li a:hover {
-    background-color: #e63946; /* Soft red background on hover */
-    color: #ffffff; /* White text on hover */
+    background-color: #e63946;
+    color: #ffffff;
 }
 
 nav ul li a.active {
     text-decoration: underline;
-    font-weight: bold; /* Optional: Make the active tab stand out more */
+    font-weight: bold;
 }
 
 /* Footer Styles */
 footer {
     display: flex;
-    justify-content: space-between; /* Spread sections horizontally */
+    justify-content: space-between;
     align-items: flex-start;
     background-color: #1a1a1a;
     color: #f5c518;
-    padding: 20px; /* Adjust padding */
+    padding: 20px;
     border-top: 3px solid #f5c518;
     border-radius: 10px;
-    overflow: hidden; /* Prevent content from overflowing */
+    overflow: hidden;
 }
 
 footer .footer-section {
-    flex: 1; /* Allow sections to take equal space */
-    min-width: 150px; /* Ensure sections don't shrink too much */
-    text-align: center; /* Center-align content */
-    margin: 0 10px; /* Add horizontal spacing */
+    flex: 1;
+    min-width: 150px;
+    text-align: center;
+    margin: 0 10px;
 }
 
 footer .footer-section h4 {
     color: #e63946;
-    margin-bottom: 10px; /* Add spacing below headers */
-    font-size: 1rem; /* Adjust font size */
+    margin-bottom: 10px;
+    font-size: 1rem;
 }
 
 footer .footer-section ul {
     list-style: none;
     padding: 0;
     display: flex;
-    justify-content: center; /* Center-align social media icons */
-    gap: 10px; /* Add spacing between icons */
+    justify-content: center;
+    gap: 10px;
 }
 
 /* Footer Social Media Links */
 footer .footer-section ul li a {
     color: #f5c518;
-    font-size: 1rem; /* Match font size with the address on desktop */
+    font-size: 1rem;
     text-decoration: none;
     display: flex;
     align-items: center;
-    gap: 5px; /* Space between icon and text */
+    gap: 5px;
 }
 
 footer .footer-section ul li a img {
-    width: 20px; /* Adjust icon size */
+    width: 20px;
     height: 20px;
     transition: transform 0.3s ease;
 }
 
 footer .footer-section ul li a img:hover {
-    transform: scale(1.1); /* Slight zoom effect on hover */
+    transform: scale(1.1);
 }
 
 footer .footer-section p.full {
-    display: block; /* Show full address on desktop */
+    display: block;
 }
 
 footer .footer-section p.short {
-    display: none; /* Hide short address on desktop */
+    display: none;
 }
 
 /* Responsive Design */
 @media (max-width: 768px) {
     /* Header Navigation */
     header nav ul {
-        flex-direction: row; /* Keep the navigation horizontal */
-        flex-wrap: wrap; /* Allow wrapping if needed */
-        justify-content: center; /* Center the navigation items */
-        gap: 5px; /* Reduce the gap between items */
+        flex-direction: row;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 5px;
     }
 
     header nav ul li a {
-        font-size: 0.7rem; /* Further reduce font size for smaller screens */
-        padding: 5px 8px; /* Adjust padding for smaller buttons */
+        font-size: 0.7rem;
+        padding: 5px 8px;
     }
 
     header {
-        padding: 8px 10px; /* Reduce header padding */
+        padding: 8px 10px;
     }
 
     header .logo img {
-        max-height: 35px; /* Further reduce logo size */
+        max-height: 35px;
     }
 
     /* Footer */
     footer {
-        flex-direction: column; /* Stack sections vertically */
+        flex-direction: column;
         align-items: center;
     }
 
     footer .footer-section.address {
-        width: 100%; /* Address section takes full width */
-        margin-bottom: 20px; /* Add extra spacing below the address */
+        width: 100%;
+        margin-bottom: 20px;
     }
 
     footer .footer-section {
-        width: 100%; /* Ensure sections take full width */
-        margin: 10px 0; /* Add vertical spacing */
+        width: 100%;
+        margin: 10px 0;
     }
 
     footer .footer-section ul {
-        flex-direction: row; /* Keep social media icons horizontal */
-        justify-content: center; /* Center-align icons */
+        flex-direction: row;
+        justify-content: center;
     }
 
     footer .footer-section ul li a {
-        font-size: 0.7rem; /* Shrink text size for smaller screens */
-        gap: 3px; /* Reduce space between icon and text */
+        font-size: 0.7rem;
+        gap: 3px;
     }
 
     footer .footer-section ul li a img {
-        width: 16px; /* Reduce icon size */
+        width: 16px;
         height: 16px;
     }
 
     footer .footer-section h4 {
-        font-size: 0.8rem; /* Reduce header size */
+        font-size: 0.8rem;
     }
 
     /* Shortened Address */
     footer .footer-section p {
-        display: none; /* Hide full address by default */
+        display: none;
     }
 
     footer .footer-section p.short {
-        display: block; /* Show shortened address */
+        display: block;
     }
 
     /* Mobile Address Visibility */
     footer .footer-section p.full {
-        display: none; /* Hide full address on mobile */
+        display: none;
     }
 
     footer .footer-section p.short {
-        display: block; /* Show short address on mobile */
+        display: block;
     }
 
     main, header, footer {
-        max-width: 95%; /* Reduce width for smaller screens */
+        max-width: 95%;
     }
 }

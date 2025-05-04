@@ -2,7 +2,7 @@
 .hero {
     position: relative;
     overflow: hidden;
-    height: 400px;
+    height: 600px;
     background-color: #111;
 }
 
@@ -31,11 +31,11 @@
     text-align: center;
     padding: 40px 20px;
     background-color: #222;
-    color: #d4af37; /* Softer golden tone */
+    color: #faa400;
 }
 
 .venue-description h2 {
-    color: #e63946;
+    color: #ec220c;
     margin-bottom: 20px;
     font-size: 2rem;
 }
@@ -44,11 +44,11 @@
 .upcoming-events {
     padding: 40px 20px;
     background-color: black;
-    color: #d4af37; /* Softer golden tone */
+    color: #faa400;
 }
 
 .upcoming-events h2 {
-    color: #e63946;
+    color: #ec220c;
     margin-bottom: 5px;
     text-align: center;
     font-size: 2rem;
@@ -67,24 +67,24 @@
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    height: 450px; /* Fixed height for consistent layout */
+    height: 450px;
     background-color: #1a1a1a;
     border-radius: 5px;
     overflow: hidden;
     text-align: center;
-    color: #d4af37;
+    color: #faa400;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-    padding: 5px; /* Add padding around the card content */
+    padding: 5px;
 }
 
 /* Event Image */
 .event-image {
-    width: calc(100% - 10px); /* Adjust width to account for padding */
-    height: auto; /* Remove fixed height */
-    aspect-ratio: 1.5 / 1; /* Ensure the height matches the width */
-    object-fit: cover; /* Maintain aspect ratio and cover the area */
-    margin: 0 auto; /* Center the image within the card */
-    border-radius: 5px; /* Optional: Add rounded corners to the image */
+    width: calc(100% - 10px);
+    height: auto;
+    aspect-ratio: 1.5 / 1;
+    object-fit: cover;
+    margin: 0 auto;
+    border-radius: 5px;
     margin-top: 2.5px;
 }
 
@@ -93,7 +93,7 @@
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
-    flex-grow: 1; /* Allow dynamic spacing */
+    flex-grow: 1;
     padding: 10px;
 }
 
@@ -103,27 +103,27 @@
     font-size: 1.4rem;
     font-weight: bold;
     margin: 5px 0;
-    color: #e63946;
+    color: #ec220c;
     transition: color 0.3s ease;
 }
 
 .event-card:hover .event-title {
     color: #b22222;
-    text-decoration: underline; /* Always underlined */
+    text-decoration: underline;
 }
 
 /* Spacer */
 .spacer {
-    flex-grow: 0.5; /* Reduced size to make it about half as big */
+    flex-grow: 0.5;
 }
 
 /* Event Datetime */
 .event-datetime {
     font-size: 1rem;
-    color: #d4af37;
+    color: #faa400;
     margin: 10px 0;
     text-align: center;
-    border-top: 1px solid #d4af37; /* Divider above datetime */
+    border-top: 1px solid #faa400;
     padding-top: 10px;
 }
 
@@ -134,21 +134,21 @@
     align-items: center;
     padding: 10px;
     background-color: #1a1a1a;
-    border-top: 1px solid #d4af37; /* Longer divider */
+    border-top: 1px solid #faa400;
 }
 
 .event-date-text {
     font-size: 1rem;
-    color: #d4af37; /* Softer golden text */
-    margin-top: 2px; /* Reduce gap between date and time */
+    color: #faa400;
+    margin-top: 2px;
     text-align: center;
 }
 
 .event-time {
     font-size: 1rem;
     font-weight: bold;
-    color: #d4af37; /* Softer golden text */
-    margin-bottom: 2px; /* Reduce gap between time and date */
+    color: #faa400;
+    margin-bottom: 2px;
     text-align: center;
 }
 
@@ -156,7 +156,7 @@
     display: flex;
     align-items: center;
     font-size: 0.9rem;
-    color: #d4af37; /* Softer golden text */
+    color: #797463;
 }
 
 .event-countdown .clock-icon {
@@ -210,11 +210,11 @@
     text-align: center;
     padding: 20px;
     background-color: #222;
-    color: #d4af37; /* Softer golden tone */
+    color: #faa400;
 }
 
 .social-sharing h2 {
-    color: #e63946;
+    color: #ec220c;
     margin-bottom: 10px;
 }
 
@@ -222,13 +222,13 @@
     display: inline-block;
     margin: 5px;
     padding: 10px 15px;
-    background-color: #e63946;
-    color: #d4af37; /* Softer golden text */
+    background-color: #ec220c;
+    color: #faa400;
     border-radius: 5px;
     font-weight: bold;
 }
 
 .social-sharing .social-buttons a:hover {
-    background-color: #d4af37; /* Softer golden hover */
+    background-color: #faa400;
     color: black;
 }
