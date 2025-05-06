@@ -1,11 +1,54 @@
-<form method="POST" enctype="multipart/form-data">
-    <input type="text" name="title" placeholder="Event Title" required>
-    <input type="date" name="date" required>
-    <input type="time" name="time" required>
-    <input type="text" name="bands" placeholder="Bands (optional)">
-    <textarea name="description" placeholder="Description (optional)"></textarea>
-    <input type="url" name="ticket_link" placeholder="Ticket Link (optional)">
-    <input type="file" name="image" accept="image/*" required>
-    <button type="submit">Add Event</button>
-  </form>
-  
+{% extends "base.html" %}
+
+{% block title %}Admin - Add Event | BuNker11{% endblock %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/admin.css') }}">
+{% endblock %}
+
+{% block content %}
+<section class="admin-section">
+    <h2>Add New Event</h2>
+    <form method="POST" enctype="multipart/form-data" class="admin-form">
+        <div class="form-group">
+            <label for="title">Event Title*</label>
+            <input type="text" id="title" name="title" required>
+        </div>
+
+        <div class="form-row">
+            <div class="form-group">
+                <label for="date">Date*</label>
+                <input type="date" id="date" name="date" required>
+            </div>
+            <div class="form-group">
+                <label for="time">Time*</label>
+                <input type="time" id="time" name="time" required>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label for="bands">Bands</label>
+            <input type="text" id="bands" name="bands" placeholder="Optional">
+        </div>
+
+        <div class="form-group">
+            <label for="description">Description</label>
+            <textarea id="description" name="description" rows="4" placeholder="Optional"></textarea>
+        </div>
+
+        <div class="form-group">
+            <label for="ticket_link">Ticket Link</label>
+            <input type="url" id="ticket_link" name="ticket_link" placeholder="https://... (optional)">
+        </div>
+
+        <div class="form-group">
+            <label for="image">Event Image*</label>
+            <input type="file" id="image" name="image" accept="image/*" required>
+        </div>
+
+        <div class="form-group">
+            <button type="submit" class="submit-button">Add Event</button>
+        </div>
+    </form>
+</section>
+{% endblock %}

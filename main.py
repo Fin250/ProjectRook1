@@ -39,7 +39,7 @@ def allowed_file(filename):
 
 def format_date_with_ordinal(date):
     day = date.day
-    if 11 <= day <= 13:  # Special case for 11th, 12th, 13th
+    if 11 <= day <= 13:
         suffix = "th"
     else:
         suffix = {1: "st", 2: "nd", 3: "rd"}.get(day % 10, "th")
@@ -48,20 +48,11 @@ def format_date_with_ordinal(date):
 # Routes
 @app.route("/")
 def home():
-    gigs = [
-        {"date": datetime.strptime("2025-06-01 20:00", "%Y-%m-%d %H:%M"), "name": "NOTHING BUT A GOOD TIME: THE ROCK ANTHEMS SHOW"},
-        {"date": datetime.strptime("2025-06-05 21:00", "%Y-%m-%d %H:%M"), "name": "RAMMLIED x ROBBED ZOMBIE"},
-        {"date": datetime.strptime("2025-06-15 20:00", "%Y-%m-%d %H:%M"), "name": "SPACE: BLOOD & BUBBLEGUM TOUR"},
-        {"date": datetime.strptime("2025-06-25 20:00", "%Y-%m-%d %H:%M"), "name": "THE COPOLICE"},
-        {"date": datetime.strptime("2025-07-03 21:30", "%Y-%m-%d %H:%M"), "name": "UK SUBS + GUITAR GANGSTERS"},
-        {"date": datetime.strptime("2025-07-16 20:30", "%Y-%m-%d %H:%M"), "name": "PUNK NIGHT: HUNG LIKE HANRATTY + CREDENTIALS + RADIOACTIVE DECAY"},
-    ]
+    events = Event.query.order_by(Event.date.asc(), Event.time.asc()).all()
+    for event in events:
+        event.formatted_date = format_date_with_ordinal(event.date)
+    return render_template("home.html", events=events)
 
-    # Format the date with the ordinal suffix
-    for gig in gigs:
-        gig["formatted_date"] = format_date_with_ordinal(gig["date"])
-
-    return render_template("home.html", gigs=gigs)
 
 @app.route("/admin", methods=["GET", "POST"])
 def admin():
