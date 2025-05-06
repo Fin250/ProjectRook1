@@ -7,6 +7,7 @@ from flask import (
     flash,
 )
 
+from flask_sqlalchemy import SQLAlchemy
 from datetime import datetime
 from werkzeug.utils import secure_filename
 import os
@@ -15,6 +16,22 @@ app = Flask(__name__)
 app.secret_key = "supersecretkey"
 app.config["UPLOAD_FOLDER"] = "static/uploads"
 app.config["ALLOWED_EXTENSIONS"] = {"png", "jpg", "jpeg", "gif"}
+
+app.config["SQLALCHEMY_DATABASE_URI"] = "sqlite:///site.db"
+app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
+db = SQLAlchemy(app)
+
+class Event(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    title = db.Column(db.String(100), nullable=False)
+    date = db.Column(db.Date, nullable=False)
+    time = db.Column(db.Time, nullable=False)
+    bands = db.Column(db.String(200), nullable=True)
+    description = db.Column(db.Text, nullable=True)
+    image_url = db.Column(db.String(200), nullable=False)
+    ticket_link = db.Column(db.String(300), nullable=True)
+    created_at = db.Column(db.DateTime, default=datetime.utcnow)
+
 
 # Utility function to check allowed file extensions
 def allowed_file(filename):
@@ -49,13 +66,45 @@ def home():
 @app.route("/admin", methods=["GET", "POST"])
 def admin():
     if request.method == "POST":
-        gig_date = request.form.get("date")
-        gig_venue = request.form.get("venue")
-        gig_city = request.form.get("city")
-        if gig_date and gig_venue and gig_city:
-            flash("Gig added successfully!", "success")
-        else:
-            flash("All fields are required!", "danger")
+        title = request.form.get("title")
+        date_str = request.form.get("date")
+        time_str = request.form.get("time")
+        bands = request.form.get("bands")
+        description = request.form.get("description")
+        ticket_link = request.form.get("ticket_link")
+
+        file = request.files.get("image")
+
+        if not (title and date_str and time_str and file and allowed_file(file.filename)):
+            flash("Missing required fields or invalid image", "danger")
+            return redirect(request.url)
+
+        try:
+            date = datetime.strptime(date_str, "%Y-%m-%d").date()
+            time = datetime.strptime(time_str, "%H:%M").time()
+        except ValueError:
+            flash("Invalid date or time format", "danger")
+            return redirect(request.url)
+
+        filename = secure_filename(file.filename)
+        file.save(os.path.join(app.config["UPLOAD_FOLDER"], filename))
+        image_url = f"uploads/{filename}"
+
+        new_event = Event(
+            title=title,
+            date=date,
+            time=time,
+            bands=bands,
+            description=description,
+            ticket_link=ticket_link,
+            image_url=image_url
+        )
+
+        db.session.add(new_event)
+        db.session.commit()
+        flash("Event added successfully!", "success")
+        return redirect(url_for("admin"))
+
     return render_template("admin.html")
 
 @app.route("/upload", methods=["GET", "POST"])
