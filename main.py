@@ -9,7 +9,7 @@ from flask import (
 )
 
 from flask_sqlalchemy import SQLAlchemy
-from datetime import datetime
+from datetime import datetime, timedelta
 from werkzeug.utils import secure_filename
 import os
 from flask_bcrypt import Bcrypt
@@ -58,9 +58,15 @@ users = {
 # Routes
 @app.route("/")
 def home():
-    events = Event.query.order_by(Event.date.asc(), Event.time.asc()).all()
+    current_time = datetime.now()
+    events = Event.query.filter(
+        (Event.date > current_time.date()) |
+        ((Event.date == current_time.date()) & (Event.time >= (current_time - timedelta(hours=1)).time()))
+    ).order_by(Event.date.asc(), Event.time.asc()).all()
+
     for event in events:
         event.formatted_date = format_date_with_ordinal(event.date)
+
     return render_template("home.html", events=events)
 
 
@@ -207,7 +213,16 @@ def contact():
 
 @app.route("/past_events")
 def past_events():
-    return render_template("past_events.html")
+    current_time = datetime.now()
+    past_events = Event.query.filter(
+        (Event.date < current_time.date()) |
+        ((Event.date == current_time.date()) & (Event.time < (current_time - timedelta(hours=1)).time()))
+    ).order_by(Event.date.desc(), Event.time.desc()).all()
+
+    for event in past_events:
+        event.formatted_date = format_date_with_ordinal(event.date)
+
+    return render_template("past_events.html", events=past_events)
 
 @app.route("/accessibility")
 def accessibility():

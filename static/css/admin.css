@@ -25,6 +25,26 @@
     letter-spacing: 1px;
 }
 
+/* Logout Button */
+.logout-button {
+    background-color: #ec220c;
+    color: #ffffff;
+    border: none;
+    border-radius: 5px;
+    padding: 8px 15px;
+    font-size: 1rem;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+.logout-button:hover {
+    background-color: #faa400;
+    color: #000;
+    transform: scale(1.05);
+}
+
+/* Add Event Button */
 .add-event-button {
     background-color: #28a745;
     border: none;

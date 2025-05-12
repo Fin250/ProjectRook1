@@ -1,6 +1,6 @@
 {% extends "base.html" %}
 
-{% block title %}Admin - Manage Events | BuNker11{% endblock %}
+{% block title %}Admin | BuNker11{% endblock %}
 
 {% block extra_css %}
 <link rel="stylesheet" href="{{ url_for('static', filename='css/admin.css') }}">
@@ -9,7 +9,10 @@
 {% block content %}
 <section class="admin-section">
     <div class="admin-header">
-        <h2>Manage Events</h2>
+        <h2>Edit Events</h2>
+            <form method="GET" action="{{ url_for('logout') }}" style="display: inline;">
+                <button class="logout-button" type="submit">Logout</button>
+            </form>
     </div>
 
     <!-- Events Grid -->

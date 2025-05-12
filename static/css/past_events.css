@@ -1,0 +1,96 @@
+/* Past Events Section */
+.past-events {
+    padding: 40px 20px;
+    background-color: #111;
+    color: #faa400;
+    text-align: center;
+}
+
+.past-events h2 {
+    color: #ec220c;
+    font-size: 2.5rem;
+    margin-bottom: 20px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+/* Events Grid */
+.events-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 20px;
+    padding: 20px;
+}
+
+/* Event Card */
+.event-card {
+    background-color: #1a1a1a;
+    border-radius: 10px;
+    overflow: hidden;
+    text-align: center;
+    color: #faa400;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    padding: 15px;
+}
+
+.event-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.5);
+}
+
+/* Event Image */
+.event-image {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+    border-radius: 8px;
+    margin-bottom: 15px;
+}
+
+/* Event Details */
+.event-details {
+    margin-top: 10px;
+}
+
+.event-title {
+    font-family: 'Metal Mania', cursive;
+    font-size: 1.4rem;
+    font-weight: bold;
+    color: #ec220c;
+    margin-bottom: 10px;
+    text-transform: capitalize;
+}
+
+.event-datetime {
+    font-size: 1rem;
+    color: #faa400;
+    margin-bottom: 15px;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .past-events h2 {
+        font-size: 2rem;
+    }
+
+    .events-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .event-card {
+        padding: 10px;
+    }
+
+    .event-image {
+        height: 150px;
+    }
+
+    .event-title {
+        font-size: 1.2rem;
+    }
+
+    .event-datetime {
+        font-size: 0.9rem;
+    }
+}
