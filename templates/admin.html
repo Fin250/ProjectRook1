@@ -1,6 +1,6 @@
 {% extends "base.html" %}
 
-{% block title %}Admin - Add Event | BuNker11{% endblock %}
+{% block title %}Admin - Manage Events | BuNker11{% endblock %}
 
 {% block extra_css %}
 <link rel="stylesheet" href="{{ url_for('static', filename='css/admin.css') }}">
@@ -8,47 +8,83 @@
 
 {% block content %}
 <section class="admin-section">
-    <h2>Add New Event</h2>
-    <form method="POST" enctype="multipart/form-data" class="admin-form">
-        <div class="form-group">
-            <label for="title">Event Title*</label>
-            <input type="text" id="title" name="title" required>
-        </div>
+    <div class="admin-header">
+        <h2>Manage Events</h2>
+    </div>
 
-        <div class="form-row">
+    <!-- Events Grid -->
+    <div class="events-grid">
+        {% for event in events %}
+        <div class="event-card" data-event-id="{{ event.id }}">
+            <img src="{{ url_for('static', filename=event.image_url) }}" alt="Event Image" class="event-image">
+            <div class="event-details">
+                <h3 class="event-title">{{ event.title }}</h3>
+                <p class="event-datetime">{{ event.date.strftime('%I:%M %p').lstrip('0') }} - {{ event.formatted_date }}</p>
+            </div>
+            <div class="event-actions">
+                <a href="{{ url_for('edit_event', event_id=event.id) }}" class="icon-button" title="Edit">
+                    <img src="{{ url_for('static', filename='images/icons/edit-icon.png') }}" alt="Edit">
+                </a>
+                <button class="icon-button" title="Delete" onclick="confirmDelete('{{ event.id }}')">
+                    <img src="{{ url_for('static', filename='images/icons/delete-icon.png') }}" alt="Delete">
+                </button>
+            </div>            
+        </div>
+        {% endfor %}
+    </div>
+
+    <!-- Add Event Form -->
+    <div id="add-event-form" class="add-event-form">
+        <h2>Add New Event</h2>
+        <form method="POST" enctype="multipart/form-data" class="admin-form">
             <div class="form-group">
-                <label for="date">Date*</label>
-                <input type="date" id="date" name="date" required>
+                <label for="title">Event Title*</label>
+                <input type="text" id="title" name="title" required>
+            </div>
+            <div class="form-row">
+                <div class="form-group">
+                    <label for="date">Date*</label>
+                    <input type="date" id="date" name="date" required>
+                </div>
+                <div class="form-group">
+                    <label for="time">Time*</label>
+                    <input type="time" id="time" name="time" required>
+                </div>
             </div>
             <div class="form-group">
-                <label for="time">Time*</label>
-                <input type="time" id="time" name="time" required>
+                <label for="bands">Bands</label>
+                <input type="text" id="bands" name="bands" placeholder="Optional">
             </div>
-        </div>
+            <div class="form-group">
+                <label for="description">Description</label>
+                <textarea id="description" name="description" rows="4" placeholder="Optional"></textarea>
+            </div>
+            <div class="form-group">
+                <label for="ticket_link">Ticket Link</label>
+                <input type="url" id="ticket_link" name="ticket_link" placeholder="https://... (optional)">
+            </div>
+            <div class="form-group">
+                <label for="image">Event Image*</label>
+                <input type="file" id="image" name="image" accept="image/*" required>
+            </div>
+            <div class="form-group">
+                <button type="submit" class="submit-button">Add Event</button>
+            </div>
+        </form>
+    </div>
 
-        <div class="form-group">
-            <label for="bands">Bands</label>
-            <input type="text" id="bands" name="bands" placeholder="Optional">
+    <!-- Settings Modal -->
+    <div id="settings-modal" class="settings-modal hidden">
+        <div class="modal-content">
+            <h2>Event Settings</h2>
+            <button onclick="editEvent()">Edit Event</button>
+            <button onclick="deleteEvent()">Delete Event</button>
+            <button onclick="closeSettings()">Close</button>
         </div>
-
-        <div class="form-group">
-            <label for="description">Description</label>
-            <textarea id="description" name="description" rows="4" placeholder="Optional"></textarea>
-        </div>
-
-        <div class="form-group">
-            <label for="ticket_link">Ticket Link</label>
-            <input type="url" id="ticket_link" name="ticket_link" placeholder="https://... (optional)">
-        </div>
-
-        <div class="form-group">
-            <label for="image">Event Image*</label>
-            <input type="file" id="image" name="image" accept="image/*" required>
-        </div>
-
-        <div class="form-group">
-            <button type="submit" class="submit-button">Add Event</button>
-        </div>
-    </form>
+    </div>
 </section>
+{% endblock %}
+
+{% block extra_js %}
+<script src="{{ url_for('static', filename='scripts/admin.js') }}"></script>
 {% endblock %}

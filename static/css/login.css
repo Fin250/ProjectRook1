@@ -1,0 +1,58 @@
+/* Login Section */
+.login-section {
+    max-width: 400px;
+    margin: 50px auto;
+    background-color: #0d0d0d;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
+    color: #faa400;
+}
+
+.login-section h2 {
+    text-align: center;
+    color: #ec220c;
+    margin-bottom: 20px;
+    font-size: 2rem;
+}
+
+.login-form .form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+.login-form .form-group label {
+    font-weight: bold;
+    color: #faa400;
+}
+
+.login-form .form-group input {
+    background-color: #1a1a1a;
+    color: #f5c518;
+    border: 1px solid #f5c518;
+    border-radius: 5px;
+    padding: 10px;
+    font-size: 1rem;
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.login-form .form-group input:focus {
+    outline: none;
+    background-color: #222;
+    color: #ffffff;
+}
+
+.login-form .form-group button {
+    background-color: #ec220c;
+    color: #ffffff;
+    font-weight: bold;
+    cursor: pointer;
+    transition: transform 0.3s ease;
+}
+
+.login-form .form-group button:hover {
+    background-color: #faa400;
+    color: #000;
+    transform: scale(1.05);
+}

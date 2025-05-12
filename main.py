@@ -5,12 +5,14 @@ from flask import (
     redirect,
     url_for,
     flash,
+    session,
 )
 
 from flask_sqlalchemy import SQLAlchemy
 from datetime import datetime
 from werkzeug.utils import secure_filename
 import os
+from flask_bcrypt import Bcrypt
 
 app = Flask(__name__)
 app.secret_key = "supersecretkey"
@@ -20,6 +22,7 @@ app.config["ALLOWED_EXTENSIONS"] = {"png", "jpg", "jpeg", "gif"}
 app.config["SQLALCHEMY_DATABASE_URI"] = "sqlite:///site.db"
 app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
 db = SQLAlchemy(app)
+bcrypt = Bcrypt(app)
 
 class Event(db.Model):
     id = db.Column(db.Integer, primary_key=True)
@@ -44,6 +47,13 @@ def format_date_with_ordinal(date):
     else:
         suffix = {1: "st", 2: "nd", 3: "rd"}.get(day % 10, "th")
     return date.strftime(f"{day}{suffix} %B %Y")
+
+# Predefined admin users
+users = {
+    "totpresents": bcrypt.generate_password_hash("totpresents").decode("utf-8"),
+    "hammerdown": bcrypt.generate_password_hash("hammerdown").decode("utf-8"),
+    "fin": bcrypt.generate_password_hash("fin").decode("utf-8"),
+}
 
 # Routes
 @app.route("/")
@@ -96,7 +106,55 @@ def admin():
         flash("Event added successfully!", "success")
         return redirect(url_for("admin"))
 
-    return render_template("admin.html")
+    # Query the database for events and pass them to the template
+    events = Event.query.order_by(Event.date.asc(), Event.time.asc()).all()
+    for event in events:
+        event.formatted_date = format_date_with_ordinal(event.date)
+
+    return render_template("admin.html", events=events)
+
+@app.route("/admin/delete/<int:event_id>", methods=["POST"])
+def delete_event(event_id):
+    if "user" not in session:
+        return "Unauthorized", 401
+
+    event = Event.query.get_or_404(event_id)
+    db.session.delete(event)
+    db.session.commit()
+    return "", 204  # No content, used by JS to remove the card
+
+@app.route("/admin/edit/<int:event_id>", methods=["GET", "POST"])
+def edit_event(event_id):
+    if "user" not in session:
+        return redirect(url_for("login"))
+
+    event = Event.query.get_or_404(event_id)
+
+    if request.method == "POST":
+        event.title = request.form.get("title")
+        event.date = datetime.strptime(request.form.get("date"), "%Y-%m-%d").date()
+        time_str = request.form.get("time")
+        try:
+            event.time = datetime.strptime(time_str, "%H:%M").time()
+        except ValueError:
+            event.time = datetime.strptime(time_str, "%H:%M:%S").time()
+
+        event.bands = request.form.get("bands")
+        event.description = request.form.get("description")
+        event.ticket_link = request.form.get("ticket_link")
+
+        file = request.files.get("image")
+        if file and allowed_file(file.filename):
+            filename = secure_filename(file.filename)
+            file.save(os.path.join(app.config["UPLOAD_FOLDER"], filename))
+            event.image_url = f"uploads/{filename}"
+
+        db.session.commit()
+        flash("Event updated successfully!", "success")
+        return redirect(url_for("admin"))
+
+    return render_template("edit_event.html", event=event)
+
 
 @app.route("/upload", methods=["GET", "POST"])
 def upload():
@@ -114,6 +172,34 @@ def upload():
             flash("File uploaded successfully!", "success")
             return redirect(url_for("upload"))
     return render_template("upload.html")
+
+@app.route("/login", methods=["GET", "POST"])
+def login():
+    if request.method == "POST":
+        username = request.form.get("username")
+        password = request.form.get("password")
+
+        if username in users and bcrypt.check_password_hash(users[username], password):
+            session["user"] = username
+            flash("Login successful!", "success")
+            return redirect(url_for("admin"))
+        else:
+            flash("Invalid username or password", "danger")
+            return redirect(request.url)
+
+    return render_template("login.html")
+
+@app.route("/logout")
+def logout():
+    session.pop("user", None)
+    flash("Logged out successfully!", "success")
+    return redirect(url_for("login"))
+
+@app.before_request
+def restrict_admin_page():
+    if request.endpoint == "admin" and "user" not in session:
+        flash("You must log in to access the admin page", "danger")
+        return redirect(url_for("login"))
 
 @app.route("/contact")
 def contact():
