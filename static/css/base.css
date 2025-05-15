@@ -36,7 +36,7 @@ header {
     padding: 10px 30px;
     background-color: #1a1a1a;
     border-bottom: 3px solid #f5c518;
-    border-radius: 10px;
+    border-radius: 0 0 10px 10px;
 }
 
 header .logo img {
