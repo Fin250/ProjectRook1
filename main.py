@@ -14,6 +14,8 @@ from werkzeug.utils import secure_filename
 import os
 from flask_bcrypt import Bcrypt
 
+import requests
+
 app = Flask(__name__)
 app.secret_key = "supersecretkey"
 app.config["UPLOAD_FOLDER"] = "static/uploads"
@@ -54,6 +56,28 @@ users = {
     "hammerdown": bcrypt.generate_password_hash("hammerdown").decode("utf-8"),
     "fin": bcrypt.generate_password_hash("fin").decode("utf-8"),
 }
+
+YOUTUBE_API_KEY = "API_KEY_HERE" #replace this with your actual YouTube API key
+CHANNEL_ID = "UCDvFWE_kn242G_JzyuC_StA"
+
+def get_recent_videos():
+    url = (
+        "https://www.googleapis.com/youtube/v3/search"
+        "?key={key}&channelId={channel}&part=snippet,id&order=date&maxResults=10"
+    ).format(key=YOUTUBE_API_KEY, channel=CHANNEL_ID)
+    
+    response = requests.get(url)
+    data = response.json()
+    
+    videos = []
+    for item in data.get("items", []):
+        if item["id"]["kind"] == "youtube#video":
+            videos.append({
+                "id": item["id"]["videoId"],
+                "title": item["snippet"]["title"],
+                "thumbnail": item["snippet"]["thumbnails"]["medium"]["url"]
+            })
+    return videos
 
 # Routes
 @app.route("/")
@@ -231,6 +255,18 @@ def accessibility():
 @app.route("/about")
 def about():
     return render_template("about.html")
+
+@app.route("/podcast")
+def podcast():
+    recent_videos = get_recent_videos()
+    latest_video_id = recent_videos[0]["id"] if recent_videos else None
+    
+    return render_template(
+        "podcast.html",
+        latest_video_id=latest_video_id,
+        recent_videos=recent_videos,
+        youtube_channel_id=CHANNEL_ID,
+    )
 
 @app.errorhandler(404)
 def page_not_found(error):

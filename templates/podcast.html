@@ -1,0 +1,41 @@
+{% extends "base.html" %}
+
+{% block title %}Podcast | BuNker11{% endblock %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/podcast.css') }}">
+{% endblock %}
+
+{% block content %}
+<section class="podcast-section">
+    <h1>TOT Presents Worthing Podcast</h1>
+
+    <!-- Most Recent Video Embed Hardcoded -->
+    <div class="recent-video">
+        <iframe 
+            src="https://www.youtube.com/embed/-3KvXitcFkk"
+            title="Latest Podcast Video" 
+            frameborder="0" 
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+            allowfullscreen>
+        </iframe>
+    </div>
+
+    <!-- Subscribe Button -->
+    <div class="subscribe-container">
+        <a href="https://www.youtube.com/channel/{{ youtube_channel_id }}?sub_confirmation=1" target="_blank" class="subscribe-button">
+            Subscribe to TOT Presents Worthing Podcast
+        </a>
+    </div>
+
+    <!-- Recent Videos Gallery -->
+    <div class="video-gallery">
+        {% for video in recent_videos %}
+        <a href="https://www.youtube.com/watch?v={{ video.id }}" target="_blank" class="video-thumb" title="{{ video.title }}">
+            <img src="{{ video.thumbnail }}" alt="{{ video.title }}">
+            <span class="video-title">{{ video.title }}</span>
+        </a>
+        {% endfor %}
+    </div>
+</section>
+{% endblock %}

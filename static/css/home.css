@@ -28,8 +28,9 @@
 
 /* Venue Description */
 .venue-description {
+    font-family: 'Alike Angular', serif;
     text-align: center;
-    padding: 40px 20px;
+    padding: 20px 20px 40px 20px;
     background-color: #222;
     color: #faa400;
 }
@@ -37,21 +38,29 @@
 .venue-description h2 {
     color: #ec220c;
     margin-bottom: 20px;
-    font-size: 2rem;
+    margin-top: 20px;
+    font-size: 4rem;
+}
+
+.venue-description p {
+    font-size: 1.4rem;
+    line-height: 1.6;
 }
 
 /* Upcoming Events */
 .upcoming-events {
     padding: 40px 20px;
-    background-color: black;
+    background-color: #222;
     color: #faa400;
 }
 
 .upcoming-events h2 {
+    font-family: 'Alike Angular', serif;
     color: #ec220c;
     margin-bottom: 5px;
+    margin-top: 5px;
     text-align: center;
-    font-size: 2rem;
+    font-size: 4rem;
 }
 
 /* Event Grid */
@@ -70,6 +79,7 @@
     height: 450px;
     background-color: #1a1a1a;
     border-radius: 5px;
+    border-color: white;
     overflow: hidden;
     text-align: center;
     color: #faa400;
@@ -99,8 +109,8 @@
 
 /* Event Title */
 .event-title {
-    font-family: 'Metal Mania', cursive; /* Apply Metal Mania font */
-    font-size: 1.4rem;
+    font-family: 'Pirata One', cursive; /* Apply Pirata One font */
+    font-size: 2.4rem;
     font-weight: bold;
     margin: 5px 0;
     color: #ec220c;
@@ -232,3 +242,19 @@
     background-color: #faa400;
     color: black;
 }
+
+/* Section Divider */
+.section-divider {
+    width: 100%;
+    margin: 0 auto 30px auto;
+    display: block;
+    line-height: 0;
+}
+
+.divider.barbed-wire img {
+  width: 100%;
+  height: auto;
+  display: block;
+  background-color: #222;
+}
+

@@ -18,10 +18,10 @@
 }
 
 .admin-header h2 {
+    font-family: 'Alike Angular', serif;
     color: #ec220c;
     font-size: 2.5rem;
     font-weight: bold;
-    text-transform: uppercase;
     letter-spacing: 1px;
 }
 
@@ -70,6 +70,7 @@
 
 /* Events Grid */
 .events-grid {
+    font-family: 'Alike Angular', serif;
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
     gap: 25px;

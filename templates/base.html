@@ -19,7 +19,11 @@
     {% block extra_css %}
     <!-- Page-specific CSS will be included here -->
     {% endblock %}
-    
+
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Alike+Angular&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Pirata+One&display=swap" rel="stylesheet">
+
     <!-- Favicons -->
     <link rel="icon" href="{{ url_for('static', filename='images/favicon_io/favicon.ico') }}" type="image/x-icon">
     <link rel="apple-touch-icon" sizes="180x180" href="{{ url_for('static', filename='images/favicon_io/apple-touch-icon.png') }}">
@@ -38,6 +42,7 @@
                 <li><a href="{{ url_for('home') }}" class="{% if request.endpoint == 'home' %}active{% endif %}">Home</a></li>
                 <li><a href="{{ url_for('about') }}" class="{% if request.endpoint == 'about' %}active{% endif %}">About</a></li>
                 <li><a href="{{ url_for('past_events') }}" class="{% if request.endpoint == 'past_events' %}active{% endif %}">Past Events</a></li>
+                <li><a href="{{ url_for('podcast') }}" class="{% if request.endpoint == 'podcast' %}active{% endif %}">Podcast</a></li>
                 <li><a href="{{ url_for('contact') }}" class="{% if request.endpoint == 'contact' %}active{% endif %}">Contact</a></li>
                 <li><a href="{{ url_for('accessibility') }}" class="{% if request.endpoint == 'accessibility' %}active{% endif %}">Accessibility</a></li>
             </ul>
@@ -59,16 +64,16 @@
         <div class="footer-section">
             <h4>TOT Social Media</h4>
             <ul>
-                <li><a href="https://facebook.com" target="_blank"><img src="{{ url_for('static', filename='images/footer/facebook-icon.png') }}" alt="Facebook">Facebook</a></li>
-                <li><a href="https://instagram.com" target="_blank"><img src="{{ url_for('static', filename='images/footer/instagram-icon.png') }}" alt="Instagram">Instagram</a></li>
-                <li><a href="https://youtube.com" target="_blank"><img src="{{ url_for('static', filename='images/footer/youtube-icon.png') }}" alt="YouTube">YouTube</a></li>
+                <li><a href="https://www.facebook.com/p/TOT-Presents-100083193887876/" target="_blank"><img src="{{ url_for('static', filename='images/footer/facebook-icon.png') }}" alt="Facebook">Facebook</a></li>
+                <li><a href="https://www.instagram.com/totpresents/" target="_blank"><img src="{{ url_for('static', filename='images/footer/instagram-icon.png') }}" alt="Instagram">Instagram</a></li>
+                <li><a href="https://www.youtube.com/channel/UCDvFWE_kn242G_JzyuC_StA" target="_blank"><img src="{{ url_for('static', filename='images/footer/youtube-icon.png') }}" alt="YouTube">YouTube</a></li>
             </ul>
         </div>
         <div class="footer-section">
             <h4>Hammerdown Social Media</h4>
             <ul>
-                <li><a href="https://facebook.com" target="_blank"><img src="{{ url_for('static', filename='images/footer/facebook-icon.png') }}" alt="Facebook">Facebook</a></li>
-                <li><a href="https://instagram.com" target="_blank"><img src="{{ url_for('static', filename='images/footer/instagram-icon.png') }}" alt="Instagram">Instagram</a></li>
+                <li><a href="https://www.facebook.com/HammerdownFestival" target="_blank"><img src="{{ url_for('static', filename='images/footer/facebook-icon.png') }}" alt="Facebook">Facebook</a></li>
+                <li><a href="https://www.instagram.com/hammerdownfestival/" target="_blank"><img src="{{ url_for('static', filename='images/footer/instagram-icon.png') }}" alt="Instagram">Instagram</a></li>
             </ul>
         </div>
     </footer>

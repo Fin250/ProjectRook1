@@ -1,0 +1,98 @@
+.podcast-section {
+    color: #d4af37; /* Your gold */
+    font-family: 'Alike Angular', serif;
+    max-width: 1000px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+.podcast-section h1 {
+    color: #ec220c; /* Red highlight */
+    text-align: center;
+    font-size: 4rem;
+    margin-top: 2rem;
+    margin-bottom: 1rem;
+}
+
+/* Most Recent Video */
+.recent-video {
+    position: relative;
+    padding-bottom: 56.25%; /* 16:9 aspect ratio */
+    height: 0;
+    overflow: hidden;
+    border: 3px solid #f5c518; /* Yellow border */
+    border-radius: 12px;
+    margin-bottom: 30px;
+}
+
+.recent-video iframe {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    border-radius: 12px;
+}
+
+/* Subscribe Button */
+.subscribe-container {
+    text-align: center;
+    margin-top: 60px;
+    margin-bottom: 40px;
+}
+
+.subscribe-button {
+    background-color: #e63946;
+    color: #f5c518;
+    font-weight: bold;
+    font-size: 1.25rem;
+    padding: 12px 30px;
+    border-radius: 30px;
+    text-decoration: none;
+    box-shadow: 0 0 10px #e63946;
+    transition: background-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.subscribe-button:hover {
+    background-color: #ec220c;
+    box-shadow: 0 0 20px #ec220c;
+}
+
+/* Recent Videos Gallery */
+.video-gallery {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+    gap: 20px;
+}
+
+.video-thumb {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    color: #d4af37;
+    font-weight: 600;
+    text-decoration: none;
+    transition: transform 0.3s ease;
+}
+
+.video-thumb img {
+    width: 100%;
+    border-radius: 8px;
+    border: 2px solid transparent;
+    box-shadow: 0 0 6px rgba(0,0,0,0.6);
+    max-height: 90px;
+    object-fit: cover;
+    margin-bottom: 8px;
+}
+
+.video-thumb:hover img {
+    border-color: #e63946;
+    box-shadow: 0 0 15px #e63946;
+    transform: scale(1.05);
+}
+
+.video-title {
+    font-size: 0.85rem;
+    color: #f5c518;
+}
