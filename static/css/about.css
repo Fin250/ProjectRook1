@@ -1,0 +1,66 @@
+.about-section {
+    max-width: 800px;
+    margin: 50px auto 80px auto;
+    background: #1a1a1a;
+    color: #faa400;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.4);
+    padding: 36px 28px;
+}
+
+.about-section h2 {
+    color: #ec220c;
+    font-family: 'Alike Angular', serif;
+    font-size: 2.2rem;
+    margin-bottom: 18px;
+}
+
+.about-section p {
+    font-size: 1.15rem;
+    margin-bottom: 18px;
+}
+
+.about-highlight {
+    background: #222;
+    border-left: 4px solid #ec220c;
+    padding: 16px 18px;
+    margin: 24px 0;
+    border-radius: 6px;
+}
+
+.about-highlight h3 {
+    color: #faa400;
+    font-size: 1.3rem;
+    margin-bottom: 8px;
+}
+
+.about-highlight p {
+    margin: 0;
+}
+
+.about-team-title {
+    color: #faa400;
+    font-size: 1.2rem;
+    margin-top: 30px;
+}
+
+.about-team-list {
+    list-style: none;
+    padding: 0;
+    margin: 16px 0;
+}
+
+.about-team-list li {
+    margin-bottom: 10px;
+}
+
+.about-contact {
+    font-size: 1rem;
+    color: #f5c518;
+    margin-top: 30px;
+}
+
+.about-contact a {
+    color: #e63946;
+    text-decoration: underline;
+}
