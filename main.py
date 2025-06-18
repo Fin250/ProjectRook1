@@ -38,7 +38,7 @@ class Event(db.Model):
     created_at = db.Column(db.DateTime, default=datetime.utcnow)
 
 
-# Utility function to check allowed file extensions
+# File extension checler
 def allowed_file(filename):
     return "." in filename and filename.rsplit(".", 1)[1].lower() in app.config["ALLOWED_EXTENSIONS"]
 
@@ -50,14 +50,14 @@ def format_date_with_ordinal(date):
         suffix = {1: "st", 2: "nd", 3: "rd"}.get(day % 10, "th")
     return date.strftime(f"{day}{suffix} %B %Y")
 
-# Predefined admin users
+# User logins
 users = {
     "totpresents": bcrypt.generate_password_hash("totpresents").decode("utf-8"),
     "hammerdown": bcrypt.generate_password_hash("hammerdown").decode("utf-8"),
     "fin": bcrypt.generate_password_hash("fin").decode("utf-8"),
 }
 
-YOUTUBE_API_KEY = "API_KEY_HERE" #replace this with your actual YouTube API key
+YOUTUBE_API_KEY = "API_KEY_HERE" # YouTube API key
 CHANNEL_ID = "UCDvFWE_kn242G_JzyuC_StA"
 
 def get_recent_videos():

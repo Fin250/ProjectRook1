@@ -1,0 +1,77 @@
+.event-detail-section {
+    max-width: 700px;
+    margin: 60px auto 80px auto;
+    background: #1a1a1a;
+    color: #faa400;
+    border-radius: 12px;
+    box-shadow: 0 4px 16px rgba(0,0,0,0.5);
+    padding: 36px 28px 32px 28px;
+    text-align: center;
+}
+
+.event-detail-section h1 {
+    font-family: 'Alike Angular', serif;
+    color: #ec220c;
+    font-size: 2.3rem;
+    margin-bottom: 24px;
+    letter-spacing: 1px;
+}
+
+.event-detail-image {
+    width: 100%;
+    max-width: 500px;
+    height: auto;
+    aspect-ratio: 1.5 / 1;
+    object-fit: cover;
+    border-radius: 8px;
+    margin-bottom: 28px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.4);
+}
+
+.event-detail-section p {
+    font-size: 1.15rem;
+    margin: 14px 0;
+    color: #faa400;
+}
+
+.event-detail-section strong {
+    color: #f5c518;
+    font-weight: bold;
+}
+
+.ticket-link {
+    display: inline-block;
+    margin-top: 18px;
+    padding: 12px 28px;
+    background: #ec220c;
+    color: #fff;
+    border-radius: 6px;
+    font-weight: bold;
+    font-size: 1.1rem;
+    text-decoration: none;
+    transition: background 0.2s, color 0.2s, transform 0.2s;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+}
+
+.ticket-link:hover {
+    background: #faa400;
+    color: #1a1a1a;
+    transform: scale(1.04);
+}
+
+@media (max-width: 768px) {
+    .event-detail-section {
+        padding: 18px 6vw 24px 6vw;
+    }
+    .event-detail-section h1 {
+        font-size: 1.5rem;
+    }
+    .event-detail-image {
+        max-width: 100%;
+        margin-bottom: 18px;
+    }
+    .ticket-link {
+        font-size: 1rem;
+        padding: 10px 18px;
+    }
+}
