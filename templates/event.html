@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+
+{% block title %}{{ event.title }} | BuNker11{% endblock %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/event_detail.css') }}">
+{% endblock %}
+
+{% block content %}
+<section class="event-detail-section">
+    <h1>{{ event.title }}</h1>
+    <img src="{{ url_for('static', filename=event.image_url) }}" alt="Event Image" class="event-detail-image">
+    <p><strong>Date:</strong> {{ event.date.strftime('%A, %d %B %Y') }}</p>
+    <p><strong>Time:</strong> {{ event.time.strftime('%I:%M %p').lstrip('0') }}</p>
+    {% if event.bands %}
+    <p><strong>Bands:</strong> {{ event.bands }}</p>
+    {% endif %}
+    {% if event.description %}
+    <p><strong>Description:</strong> {{ event.description }}</p>
+    {% endif %}
+    {% if event.ticket_link %}
+    <p><a href="{{ event.ticket_link }}" target="_blank" rel="noopener" class="ticket-link">Buy Tickets</a></p>
+    {% endif %}
+</section>
+{% endblock %}

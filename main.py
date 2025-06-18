@@ -151,7 +151,7 @@ def delete_event(event_id):
     event = Event.query.get_or_404(event_id)
     db.session.delete(event)
     db.session.commit()
-    return "", 204  # No content, used by JS to remove the card
+    return "", 204
 
 @app.route("/admin/edit/<int:event_id>", methods=["GET", "POST"])
 def edit_event(event_id):
@@ -267,6 +267,16 @@ def podcast():
         recent_videos=recent_videos,
         youtube_channel_id=CHANNEL_ID,
     )
+
+@app.route("/event/<event_id_title>")
+def event_detail(event_id_title):
+    try:
+        event_id = int(event_id_title.split("-", 1)[0])
+    except (ValueError, IndexError):
+        return render_template("404.html"), 404
+
+    event = Event.query.get_or_404(event_id)
+    return render_template("event.html", event=event)
 
 @app.errorhandler(404)
 def page_not_found(error):

@@ -11,7 +11,6 @@
 {% block content %}
 <section class="hero">
     <div class="slideshow">
-        <!-- Example slideshow images -->
         <img src="{{ url_for('static', filename='images/slideshow/slideshow1.jpg') }}" alt="Slideshow Image 1">
         <img src="{{ url_for('static', filename='images/slideshow/slideshow2.jpg') }}" alt="Slideshow Image 2">
         <img src="{{ url_for('static', filename='images/slideshow/slideshow3.jpg') }}" alt="Slideshow Image 3">
@@ -35,6 +34,7 @@
     <h2>Upcoming Events</h2>
     <div class="events-grid">
         {% for event in events %}
+        <a href="{{ url_for('event_detail', event_id_title=event.id ~ '-' ~ event.title|replace(' ', '-') ) }}">
         <div class="event-card">
             <img src="{{ url_for('static', filename=event.image_url) }}" alt="Event Image" class="event-image">
             <div class="event-details">
@@ -52,6 +52,7 @@
                 </button>
             </div>
         </div>
+        </a>
         {% endfor %}
     </div>
 </section>
