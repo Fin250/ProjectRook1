@@ -248,9 +248,9 @@ def past_events():
 
     return render_template("past_events.html", events=past_events)
 
-@app.route("/accessibility")
-def accessibility():
-    return render_template("accessibility.html")
+@app.route("/venue")
+def venue():
+    return render_template("venue.html")
 
 @app.route("/about")
 def about():

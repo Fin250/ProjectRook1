@@ -1,0 +1,50 @@
+{% extends "base.html" %}
+
+{% block title %}Venue | BuNker11{% endblock %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/venue.css') }}">
+{% endblock %}
+
+{% block content %}
+<main>
+    <section class="venue-section">
+        <div class="venue-accessibility">
+            <h2>Accessibility Information</h2>
+            <p>
+                Unfortunately, BuNker11 is not wheelchair accessible at this time.
+            </p>
+            <p>
+                We apologize for any inconvenience and are always happy to answer questions about access—please
+                <a href="{{ url_for('contact') }}">contact us</a> if you need more information.
+            </p>
+        </div>
+        <div class="venue-details">
+            <h2>Venue Details</h2>
+            <div class="venue-details-categories">
+                <div class="venue-details-category">
+                    <h3>Facilities</h3>
+                    <ul class="venue-details-list">
+                        <li><strong>Capacity:</strong> 120 people</li>
+                        <li><strong>Bar:</strong> Full bar available</li>
+                        <li><strong>Toilets:</strong> On-site</li>
+                        <li><strong>Artist Green Room:</strong> Yes</li>
+                        <li><strong>Load-in:</strong> Rear alley access, no ramp</li>
+                        <li><strong>Parking:</strong> Limited on-street parking nearby</li>
+                    </ul>
+                </div>
+                <div class="venue-details-category">
+                    <h3>Equipment</h3>
+                    <ul class="venue-details-list">
+                        <li><strong>Stage Size:</strong> 5m x 3m</li>
+                        <li><strong>PA System:</strong> 2000W, 16-channel mixer</li>
+                        <li><strong>Monitors:</strong> 2x floor wedges</li>
+                        <li><strong>Lighting:</strong> Basic stage wash, 2x moving heads</li>
+                        <li><strong>Backline:</strong> Drum kit (bring your own breakables), 2x guitar amps, 1x bass amp</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+</main>
+{% endblock %}

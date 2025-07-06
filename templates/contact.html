@@ -1,0 +1,33 @@
+{% extends "base.html" %}
+
+{% block title %}Contact | BuNker11{% endblock %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/contact.css') }}">
+{% endblock %}
+
+{% block content %}
+<main>
+    <section class="contact-section">
+        <h2>Contact</h2>
+        <div class="contact-cards">
+            <div class="contact-card tot">
+                <img src="{{ url_for('static', filename='images/tot_simple.JPG') }}" alt="TOT Presents Icon" class="contact-icon">
+                <h3>TOT Presents</h3>
+                <a href="mailto:totpresentsworthing@gmail.com" class="contact-email">totpresentsworthing@gmail.com</a>
+                <p class="contact-desc">
+                    TOT Presents brings the best in alternative, punk, and underground music to Worthing. Reach out for gig info, bookings, or collaborations.
+                </p>
+            </div>
+            <div class="contact-card hammerdown">
+                <img src="{{ url_for('static', filename='images/hammerdown_gold.png') }}" alt="Hammerdown Icon" class="contact-icon">
+                <h3>Hammerdown</h3>
+                <a href="mailto:hammerdownfestival@gmail.com" class="contact-email">hammerdownfestival@gmail.com</a>
+                <p class="contact-desc">
+                    Hammerdown is Worthing’s home for heavy music and festival events. Contact us for festival details, band submissions, or partnerships.
+                </p>
+            </div>
+        </div>
+    </section>
+</main>
+{% endblock %}
