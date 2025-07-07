@@ -7,24 +7,30 @@ from flask import (
     flash,
     session,
 )
-
 from flask_sqlalchemy import SQLAlchemy
-from datetime import datetime, timedelta
-from werkzeug.utils import secure_filename
-import os
 from flask_bcrypt import Bcrypt
+from flask_limiter import Limiter
+from flask_limiter.util import get_remote_address
 
+from werkzeug.utils import secure_filename
+from functools import wraps
+from datetime import datetime, timedelta
+import os
 import requests
 
 app = Flask(__name__)
-app.secret_key = "supersecretkey"
+app.secret_key = os.environ.get("SECRET_KEY", "devfallbacksecret")
 app.config["UPLOAD_FOLDER"] = "static/uploads"
 app.config["ALLOWED_EXTENSIONS"] = {"png", "jpg", "jpeg", "gif"}
-
 app.config["SQLALCHEMY_DATABASE_URI"] = "sqlite:///site.db"
 app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
+app.config["MAX_CONTENT_LENGTH"] = 5 * 1024 * 1024  # 5 MB file upload limit
+
 db = SQLAlchemy(app)
 bcrypt = Bcrypt(app)
+
+# Rate limiter
+limiter = Limiter(get_remote_address, app=app, default_limits=["200 per day", "50 per hour"])
 
 class Event(db.Model):
     id = db.Column(db.Integer, primary_key=True)
@@ -37,27 +43,30 @@ class Event(db.Model):
     ticket_link = db.Column(db.String(300), nullable=True)
     created_at = db.Column(db.DateTime, default=datetime.utcnow)
 
-
-# File extension checler
 def allowed_file(filename):
     return "." in filename and filename.rsplit(".", 1)[1].lower() in app.config["ALLOWED_EXTENSIONS"]
 
 def format_date_with_ordinal(date):
     day = date.day
-    if 11 <= day <= 13:
-        suffix = "th"
-    else:
-        suffix = {1: "st", 2: "nd", 3: "rd"}.get(day % 10, "th")
+    suffix = "th" if 11 <= day <= 13 else {1: "st", 2: "nd", 3: "rd"}.get(day % 10, "th")
     return date.strftime(f"{day}{suffix} %B %Y")
 
-# User logins
+def login_required(f):
+    @wraps(f)
+    def decorated_function(*args, **kwargs):
+        if "user" not in session:
+            flash("You must log in to access this page", "danger")
+            return redirect(url_for("login"))
+        return f(*args, **kwargs)
+    return decorated_function
+
 users = {
     "totpresents": bcrypt.generate_password_hash("totpresents").decode("utf-8"),
     "hammerdown": bcrypt.generate_password_hash("hammerdown").decode("utf-8"),
     "fin": bcrypt.generate_password_hash("fin").decode("utf-8"),
 }
 
-YOUTUBE_API_KEY = "API_KEY_HERE" # YouTube API key
+YOUTUBE_API_KEY = os.environ.get("YOUTUBE_API_KEY", "")
 CHANNEL_ID = "UCDvFWE_kn242G_JzyuC_StA"
 
 def get_recent_videos():
@@ -65,10 +74,15 @@ def get_recent_videos():
         "https://www.googleapis.com/youtube/v3/search"
         "?key={key}&channelId={channel}&part=snippet,id&order=date&maxResults=10"
     ).format(key=YOUTUBE_API_KEY, channel=CHANNEL_ID)
-    
-    response = requests.get(url)
-    data = response.json()
-    
+
+    try:
+        response = requests.get(url)
+        response.raise_for_status()
+        data = response.json()
+    except Exception as e:
+        app.logger.error(f"YouTube API error: {e}")
+        return []
+
     videos = []
     for item in data.get("items", []):
         if item["id"]["kind"] == "youtube#video":
@@ -79,7 +93,6 @@ def get_recent_videos():
             })
     return videos
 
-# Routes
 @app.route("/")
 def home():
     current_time = datetime.now()
@@ -90,26 +103,19 @@ def home():
 
     for event in events:
         event.formatted_date = format_date_with_ordinal(event.date)
-
     return render_template("home.html", events=events)
 
 @app.route("/admin")
+@login_required
 def admin():
-    if "user" not in session:
-        return redirect(url_for("login"))
-    
-    # Query the database for events and pass them to the template
     events = Event.query.order_by(Event.date.asc(), Event.time.asc()).all()
     for event in events:
         event.formatted_date = format_date_with_ordinal(event.date)
-
     return render_template("admin.html", events=events)
 
 @app.route("/admin/add-event", methods=["GET", "POST"])
+@login_required
 def add_event():
-    if "user" not in session:
-        return redirect(url_for("login"))
-
     if request.method == "POST":
         title = request.form.get("title")
         date_str = request.form.get("date")
@@ -128,6 +134,16 @@ def add_event():
             time = datetime.strptime(time_str, "%H:%M").time()
         except ValueError:
             flash("Invalid date or time format", "danger")
+            return redirect(request.url)
+
+        if date < datetime.today().date():
+            flash("Event date must be in the future", "danger")
+            return redirect(request.url)
+
+        # Check for duplicates
+        existing = Event.query.filter_by(title=title, date=date, time=time).first()
+        if existing:
+            flash("An event with the same title, date, and time already exists.", "danger")
             return redirect(request.url)
 
         filename = secure_filename(file.filename)
@@ -152,31 +168,36 @@ def add_event():
     return render_template("add_event.html")
 
 @app.route("/admin/delete/<int:event_id>", methods=["POST"])
+@login_required
 def delete_event(event_id):
-    if "user" not in session:
-        return "Unauthorized", 401
-
     event = Event.query.get_or_404(event_id)
     db.session.delete(event)
     db.session.commit()
     return "", 204
 
 @app.route("/admin/edit/<int:event_id>", methods=["GET", "POST"])
+@login_required
 def edit_event(event_id):
-    if "user" not in session:
-        return redirect(url_for("login"))
-
     event = Event.query.get_or_404(event_id)
 
     if request.method == "POST":
         event.title = request.form.get("title")
-        event.date = datetime.strptime(request.form.get("date"), "%Y-%m-%d").date()
+        date_str = request.form.get("date")
         time_str = request.form.get("time")
-        try:
-            event.time = datetime.strptime(time_str, "%H:%M").time()
-        except ValueError:
-            event.time = datetime.strptime(time_str, "%H:%M:%S").time()
 
+        try:
+            date = datetime.strptime(date_str, "%Y-%m-%d").date()
+            time = datetime.strptime(time_str, "%H:%M").time()
+        except ValueError:
+            flash("Invalid date or time format", "danger")
+            return redirect(request.url)
+
+        if date < datetime.today().date():
+            flash("Cannot set event date in the past", "danger")
+            return redirect(request.url)
+
+        event.date = date
+        event.time = time
         event.bands = request.form.get("bands")
         event.description = request.form.get("description")
         event.ticket_link = request.form.get("ticket_link")
@@ -192,7 +213,6 @@ def edit_event(event_id):
         return redirect(url_for("admin"))
 
     return render_template("edit_event.html", event=event)
-
 
 @app.route("/upload", methods=["GET", "POST"])
 def upload():
@@ -212,6 +232,7 @@ def upload():
     return render_template("upload.html")
 
 @app.route("/login", methods=["GET", "POST"])
+@limiter.limit("5 per minute")
 def login():
     if request.method == "POST":
         username = request.form.get("username")
@@ -233,12 +254,6 @@ def logout():
     flash("Logged out successfully!", "success")
     return redirect(url_for("login"))
 
-@app.before_request
-def restrict_admin_page():
-    if request.endpoint == "admin" and "user" not in session:
-        flash("You must log in to access the admin page", "danger")
-        return redirect(url_for("login"))
-
 @app.route("/contact")
 def contact():
     return render_template("contact.html")
@@ -253,7 +268,6 @@ def past_events():
 
     for event in past_events:
         event.formatted_date = format_date_with_ordinal(event.date)
-
     return render_template("past_events.html", events=past_events)
 
 @app.route("/venue")
@@ -269,7 +283,6 @@ def podcast():
     recent_videos = get_recent_videos()
     latest_video_id = recent_videos[0]["id"] if recent_videos else None
 
-    # Read the admin-updated podcast URL
     podcast_url_file = "podcast_url.txt"
     podcast_url = ""
     if os.path.exists(podcast_url_file):
@@ -295,11 +308,8 @@ def event_detail(event_id_title):
     return render_template("event.html", event=event)
 
 @app.route("/admin/update-podcast", methods=["GET", "POST"])
+@login_required
 def update_podcast():
-    if "user" not in session:
-        return redirect(url_for("login"))
-
-    # Store the latest podcast URL in a text file (simple approach)
     podcast_url_file = "podcast_url.txt"
     current_url = ""
     if os.path.exists(podcast_url_file):
@@ -322,7 +332,6 @@ def update_podcast():
 def page_not_found(error):
     return render_template("404.html"), 404
 
-# Run app
 if __name__ == "__main__":
     if not os.path.exists(app.config["UPLOAD_FOLDER"]):
         os.makedirs(app.config["UPLOAD_FOLDER"])
