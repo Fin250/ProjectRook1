@@ -1,0 +1,36 @@
+{% extends "base.html" %}
+
+{% block title %}Update Podcast | BuNker11{% endblock %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/admin.css') }}">
+{% endblock %}
+
+{% block content %}
+<section class="update-podcast-section">
+    <h2>Update Podcast Video</h2>
+    <p>Paste the full YouTube link for the latest podcast episode. This will update the video shown on the Podcast page.</p>
+    <form method="POST" class="admin-form" style="max-width: 500px; margin: 0 auto;">
+        <div class="form-group">
+            <label for="youtube_url">YouTube Video URL</label>
+            <input type="url" id="youtube_url" name="youtube_url" placeholder="https://www.youtube.com/watch?v=..." value="{{ current_url }}" required>
+        </div>
+        <div class="form-group">
+            <button type="submit">Update Podcast</button>
+        </div>
+    </form>
+    {% if current_url %}
+    <div class="current-podcast-preview">
+        <h3>Current Video Preview:</h3>
+        <iframe 
+            src="https://www.youtube.com/embed/{{ current_url.split('v=')[-1] if 'v=' in current_url else '' }}"
+            title="Current Podcast Video"
+            frameborder="0"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+            allowfullscreen
+            style="width:100%;max-width:400px;height:225px;margin:16px auto 0 auto;display:block;">
+        </iframe>
+    </div>
+    {% endif %}
+</section>
+{% endblock %}

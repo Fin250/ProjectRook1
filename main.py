@@ -93,9 +93,23 @@ def home():
 
     return render_template("home.html", events=events)
 
-
-@app.route("/admin", methods=["GET", "POST"])
+@app.route("/admin")
 def admin():
+    if "user" not in session:
+        return redirect(url_for("login"))
+    
+    # Query the database for events and pass them to the template
+    events = Event.query.order_by(Event.date.asc(), Event.time.asc()).all()
+    for event in events:
+        event.formatted_date = format_date_with_ordinal(event.date)
+
+    return render_template("admin.html", events=events)
+
+@app.route("/admin/add-event", methods=["GET", "POST"])
+def add_event():
+    if "user" not in session:
+        return redirect(url_for("login"))
+
     if request.method == "POST":
         title = request.form.get("title")
         date_str = request.form.get("date")
@@ -103,7 +117,6 @@ def admin():
         bands = request.form.get("bands")
         description = request.form.get("description")
         ticket_link = request.form.get("ticket_link")
-
         file = request.files.get("image")
 
         if not (title and date_str and time_str and file and allowed_file(file.filename)):
@@ -136,12 +149,7 @@ def admin():
         flash("Event added successfully!", "success")
         return redirect(url_for("admin"))
 
-    # Query the database for events and pass them to the template
-    events = Event.query.order_by(Event.date.asc(), Event.time.asc()).all()
-    for event in events:
-        event.formatted_date = format_date_with_ordinal(event.date)
-
-    return render_template("admin.html", events=events)
+    return render_template("add_event.html")
 
 @app.route("/admin/delete/<int:event_id>", methods=["POST"])
 def delete_event(event_id):
@@ -260,12 +268,20 @@ def about():
 def podcast():
     recent_videos = get_recent_videos()
     latest_video_id = recent_videos[0]["id"] if recent_videos else None
-    
+
+    # Read the admin-updated podcast URL
+    podcast_url_file = "podcast_url.txt"
+    podcast_url = ""
+    if os.path.exists(podcast_url_file):
+        with open(podcast_url_file, "r") as f:
+            podcast_url = f.read().strip()
+
     return render_template(
         "podcast.html",
         latest_video_id=latest_video_id,
         recent_videos=recent_videos,
         youtube_channel_id=CHANNEL_ID,
+        podcast_url=podcast_url,
     )
 
 @app.route("/event/<event_id_title>")
@@ -277,6 +293,30 @@ def event_detail(event_id_title):
 
     event = Event.query.get_or_404(event_id)
     return render_template("event.html", event=event)
+
+@app.route("/admin/update-podcast", methods=["GET", "POST"])
+def update_podcast():
+    if "user" not in session:
+        return redirect(url_for("login"))
+
+    # Store the latest podcast URL in a text file (simple approach)
+    podcast_url_file = "podcast_url.txt"
+    current_url = ""
+    if os.path.exists(podcast_url_file):
+        with open(podcast_url_file, "r") as f:
+            current_url = f.read().strip()
+
+    if request.method == "POST":
+        new_url = request.form.get("youtube_url", "").strip()
+        if new_url:
+            with open(podcast_url_file, "w") as f:
+                f.write(new_url)
+            flash("Podcast link updated!", "success")
+            return redirect(url_for("update_podcast"))
+        else:
+            flash("Please enter a valid YouTube URL.", "danger")
+
+    return render_template("update_podcast.html", current_url=current_url)
 
 @app.errorhandler(404)
 def page_not_found(error):

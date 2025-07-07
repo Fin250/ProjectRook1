@@ -277,27 +277,114 @@
     transform: scale(1.05);
 }
 
-/* Responsive Design */
-@media (max-width: 768px) {
-    .admin-header h2 {
-        font-size: 2rem;
-    }
+/* Admin Actions */
+.admin-actions {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 24px;
+    margin-bottom: 36px;
+}
 
-    .events-grid {
-        grid-template-columns: 1fr;
-    }
+.admin-action-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 40%;
+    min-width: 220px;
+    max-width: 400px;
+    padding: 24px 0;
+    font-size: 1.3rem;
+    font-family: 'Alike Angular', serif;
+    font-weight: bold;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    text-align: center;
+    transition: background 0.2s, color 0.2s, transform 0.2s, box-shadow 0.2s;
+    box-shadow: 0 4px 16px rgba(0,0,0,0.18);
+    margin-bottom: 0;
+    text-decoration: none;
+    gap: 16px;
+}
 
-    .add-event-button {
-        width: 50px;
-        height: 50px;
-    }
+.add-event-btn {
+    background: linear-gradient(90deg, #176c2b 0%, #28a745 100%);
+    color: #fff;
+}
 
-    .add-event-button img {
-        width: 24px;
-        height: 24px;
-    }
+.add-event-btn:hover {
+    background: linear-gradient(90deg, #28a745 0%, #176c2b 100%);
+    color: #fff;
+    transform: scale(1.04);
+}
 
-    .modal-content button {
-        font-size: 0.9rem;
+.update-podcast-btn {
+    background: linear-gradient(90deg, #b31217 0%, #e52d27 100%);
+    color: #fff;
+}
+
+.update-podcast-btn:hover {
+    background: linear-gradient(90deg, #e52d27 0%, #b31217 100%);
+    color: #fff;
+    transform: scale(1.04);
+}
+
+/* Update Podcast Section */
+.update-podcast-section {
+    background: #1a1a1a;
+    color: #faa400;
+    border-radius: 12px;
+    box-shadow: 0 4px 16px rgba(0,0,0,0.5);
+    padding: 36px 28px 32px 28px;
+    max-width: 600px;
+    margin: 60px auto 80px auto;
+    text-align: center;
+}
+
+.update-podcast-section h2 {
+    color: #ec220c;
+    font-family: 'Alike Angular', serif;
+    font-size: 2rem;
+    margin-bottom: 18px;
+}
+
+.update-podcast-section p {
+    font-size: 1.1rem;
+    margin-bottom: 18px;
+}
+
+.current-podcast-preview h3 {
+    color: #faa400;
+    font-size: 1.1rem;
+    margin-top: 24px;
+    margin-bottom: 8px;
+}
+
+/* Icon styling for left of text */
+.admin-action-btn img {
+    height: 28px;
+    margin-right: 12px;
+    filter: brightness(0) invert(1); /* makes icon white if it's a dark SVG/PNG */
+}
+
+@media (max-width: 900px) {
+    .admin-action-btn {
+        width: 48%;
+        min-width: 160px;
+        font-size: 1.1rem;
+        padding: 18px 0;
+    }
+}
+
+@media (max-width: 700px) {
+    .admin-actions {
+        flex-direction: column;
+        gap: 18px;
+    }
+    .admin-action-btn {
+        width: 90%;
+        min-width: 0;
+        max-width: 100%;
     }
 }

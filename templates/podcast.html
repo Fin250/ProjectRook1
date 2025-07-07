@@ -10,15 +10,26 @@
 <section class="podcast-section">
     <h1>TOT Presents Worthing Podcast</h1>
 
-    <!-- Most Recent Video Embed Hardcoded -->
+    <!-- Most Recent Video Embed (Dynamic) -->
     <div class="recent-video">
-        <iframe 
-            src="https://www.youtube.com/embed/-3KvXitcFkk"
-            title="Latest Podcast Video" 
-            frameborder="0" 
-            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
-            allowfullscreen>
-        </iframe>
+        {% if podcast_url %}
+            {% set video_id = podcast_url.split('v=')[-1].split('&')[0] if 'v=' in podcast_url else podcast_url.split('/')[-1] %}
+            <iframe 
+                src="https://www.youtube.com/embed/{{ video_id }}"
+                title="Latest Podcast Video" 
+                frameborder="0" 
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+                allowfullscreen>
+            </iframe>
+        {% else %}
+            <iframe 
+                src="https://www.youtube.com/embed/-3KvXitcFkk"
+                title="Latest Podcast Video" 
+                frameborder="0" 
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+                allowfullscreen>
+            </iframe>
+        {% endif %}
     </div>
 
     <!-- Subscribe Button -->

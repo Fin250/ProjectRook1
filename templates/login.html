@@ -7,20 +7,27 @@
 {% endblock %}
 
 {% block content %}
-<section class="login-section">
-    <h2>Admin Login</h2>
-    <form method="POST" class="login-form">
-        <div class="form-group">
-            <label for="username">Username</label>
-            <input type="text" id="username" name="username" required>
-        </div>
-        <div class="form-group">
-            <label for="password">Password</label>
-            <input type="password" id="password" name="password" required>
-        </div>
-        <div class="form-group">
-            <button type="submit" class="submit-button">Login</button>
-        </div>
-    </form>
-</section>
+<main class="login-main">
+    <a href="javascript:history.length > 1 ? history.back() : window.location.href='{{ url_for('home') }}';" class="back-arrow" aria-label="Go back">
+        <svg width="32" height="32" viewBox="0 0 32 32" fill="none" style="vertical-align: middle;">
+            <path d="M20 28L8 16L20 4" stroke="#f5c518" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+    </a>
+    <section class="login-section">
+        <h2>Admin Login</h2>
+        <form method="POST" class="login-form">
+            <div class="form-group">
+                <label for="username">Username</label>
+                <input type="text" id="username" name="username" required>
+            </div>
+            <div class="form-group">
+                <label for="password">Password</label>
+                <input type="password" id="password" name="password" required>
+            </div>
+            <div class="form-group">
+                <button type="submit" class="submit-button">Login</button>
+            </div>
+        </form>
+    </section>
+</main>
 {% endblock %}
