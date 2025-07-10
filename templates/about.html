@@ -7,30 +7,46 @@
 {% endblock %}
 
 {% block content %}
-<main>
-    <section class="about-section">
-        <h2>About BuNker11</h2>
-        <p>
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque euismod, nisi eu consectetur cursus, nisl erat dictum urna, nec dictum ex enim nec urna. 
-        </p>
-        <div class="about-highlight">
-            <h3>Our Mission</h3>
+<section class="about-section">
+    <h2>About BuNker11</h2>
+    <p>
+        BuNker11 (BN11) is the home of grass roots live and original music in the West End of Worthing. The venue currently hosts regular monthly gigs by TOT Presents and Hammerdown music promoters as well as some gigs by Paralytic Promotions.
+    </p>
+    <p style="margin-bottom: 32px;">
+        While most of the gigs are punk, post punk, rock or metal we are keen to mix genres and push boundaries.
+    </p>
+    <p style="margin-bottom: 32px;">
+        If you are a local band or performer looking to perform please get in touch. We have a <a href="{{ url_for('venue') }}">full backline</a> and the venue supplies a sound tech. Most gigs are ticketed with bands getting a share of the door money.
+    </p>
+
+    <div class="about-team-cards">
+        <div class="about-highlight about-team-card">
+            <div class="about-team-header">
+                <img src="{{ url_for('static', filename='images/tot_record-invis.png') }}" alt="TOT Presents Logo" class="about-team-logo">
+                <span class="about-team-name">TOTPresents</span>
+            </div>
             <p>
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus lacinia odio vitae vestibulum vestibulum.
+                TOT Presents is a music promotion company formed by Colm Sweet and Kevin Hough (owner of Train of Thought record shop). Between us we have put on well over 200 gigs in Worthing including at The Venue, Bar 42, The Alehouse Kitchen, Cellar Arts Club, The Charles Dickens, Bar Orange.
             </p>
         </div>
-        <h3 class="about-team-title">Meet the Team</h3>
-        <ul class="about-team-list">
-            <li>
-                <strong>Colm:</strong> Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus lacinia odio vitae vestibulum vestibulum.
-            </li>
-            <li>
-                <strong>Harry:</strong> Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus lacinia odio vitae vestibulum vestibulum.
-            </li>
-        </ul>
-        <p class="about-contact">
-            Want to know more? <a href="{{ url_for('contact') }}">Contact us</a> for more information.
-        </p>
-    </section>
-</main>
+        <div class="about-highlight about-team-card">
+            <div class="about-team-header">
+                <img src="{{ url_for('static', filename='images/hammerdown_gold.png') }}" alt="Hammerdown Logo" class="about-team-logo">
+                <span class="about-team-name">Hammerdown</span>
+            </div>
+            <p>
+                Hammerdown is a Sussex based brand promoting rock and metal across the county, from successful festivals at 850 capacity venues, to grass roots venues like Worthing's brand new BuNker11.
+            </p>
+            <p>
+                Hammerdown strives to provide grass roots bands the opportunities to perform on big stages, and works with musicians on brand development throughout their careers.
+            </p>
+            <p>
+                Hammerdown manages 18 bands, runs 3 festivals, and in 2025 is hosting over 100 shows nationally. Since its inception in 2015 as a grass roots music festival, Hammerdown has ballooned into so much more. A community, a family, an agency, and a place where people feel free and safe.
+            </p>
+            <p>
+                BuNker11 is a helpful proving ground for up and coming bands to get themselves in front of the Hammerdown team in order to earn themselves bigger opportunities at the brand’s larger events.
+            </p>
+        </div>
+    </div>
+</section>
 {% endblock %}
