@@ -187,54 +187,72 @@
 .admin-form .form-group label {
     font-weight: bold;
     color: #faa400;
-    font-size: 1rem;
+    font-size: 1.05rem;
+    margin-bottom: 4px;
+    letter-spacing: 0.5px;
 }
 
 .admin-form .form-group input,
-.admin-form .form-group textarea,
-.admin-form .form-group button {
-    background-color: #1a1a1a;
-    color: #f5c518;
-    border: 1px solid #f5c518;
+.admin-form .form-group textarea {
+    background-color: #cac5c5; /* Softer light gray */
+    color: #111;
+    border: 1.5px solid #f5c518;
     border-radius: 8px;
     padding: 12px;
     font-size: 1rem;
-    transition: background-color 0.3s ease, color 0.3s ease;
+    transition: border 0.3s, box-shadow 0.3s, background 0.3s;
+    box-shadow: 0 1px 4px rgba(0,0,0,0.07);
 }
 
 .admin-form .form-group input:focus,
 .admin-form .form-group textarea:focus {
     outline: none;
-    background-color: #222;
-    color: #ffffff;
+    border-color: #ec220c;
+    box-shadow: 0 0 0 2px #faa40033;
+    background-color: #eaeaea;
+    color: #111;
 }
 
-.admin-form .form-group input[type="file"] {
-    padding: 5px;
+/* Make date/time inputs easier to type in */
+.admin-form input[type="date"],
+.admin-form input[type="time"] {
+    font-family: inherit;
+    letter-spacing: 1px;
+    font-size: 1.05rem;
+    background-color: #cac5c5;
+    color: #111;
+    border-radius: 8px;
+    border: 1.5px solid #f5c518;
+    padding: 12px;
+    transition: border 0.3s, box-shadow 0.3s, background 0.3s;
 }
 
 .admin-form .form-group button {
-    background-color: #ec220c;
-    color: #ffffff;
+    background: linear-gradient(90deg, #ec220c 60%, #faa400 100%);
+    color: #fff;
     font-weight: bold;
+    font-size: 1.1rem;
+    border: none;
+    border-radius: 6px;
+    padding: 13px 0;
+    margin-top: 10px;
     cursor: pointer;
-    transition: transform 0.3s ease, background-color 0.3s ease;
+    transition: opacity 0.2s;
 }
-
-.admin-form .form-group button:hover {
-    background-color: #faa400;
-    color: #000;
-    transform: scale(1.05);
+.admin-form input[type="date"]:focus::-webkit-calendar-picker-indicator {
+    opacity: 1;
 }
 
 /* Form Row */
 .form-row {
     display: flex;
     gap: 20px;
+    flex-wrap: wrap;
 }
 
 .form-row .form-group {
-    flex: 1;
+    flex: 1 1 160px;
+    min-width: 140px;
 }
 
 /* Settings Modal */
@@ -385,5 +403,12 @@
         width: 90%;
         min-width: 0;
         max-width: 100%;
+    }
+}
+
+@media (max-width: 600px) {
+    .form-row {
+        flex-direction: column;
+        gap: 0;
     }
 }

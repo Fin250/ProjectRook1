@@ -12,7 +12,7 @@
     <form method="POST" enctype="multipart/form-data" class="admin-form">
         <div class="form-group">
             <label for="title">Title</label>
-            <input type="text" id="title" name="title" required>
+            <input type="text" id="title" name="title" required autocomplete="off" placeholder="e.g. Metal Night at BuNker11">
         </div>
         <div class="form-row">
             <div class="form-group">
@@ -20,21 +20,21 @@
                 <input type="date" id="date" name="date" required>
             </div>
             <div class="form-group">
-                <label for="time">Time</label>
+                <label for="time">Time <span style="font-weight:normal;color:#faa400;font-size:0.95em;">(doors open)</span></label>
                 <input type="time" id="time" name="time" required>
             </div>
         </div>
         <div class="form-group">
-            <label for="bands">Bands</label>
-            <input type="text" id="bands" name="bands">
+            <label for="bands">Bands <span style="font-weight:normal;color:#faa400;font-size:0.95em;">(comma separated)</span></label>
+            <input type="text" id="bands" name="bands" placeholder="e.g. Band1, Band2, Band3">
         </div>
         <div class="form-group">
             <label for="description">Description</label>
-            <textarea id="description" name="description" rows="3"></textarea>
+            <textarea id="description" name="description" rows="3" placeholder="Event details, lineup, timings, etc."></textarea>
         </div>
         <div class="form-group">
             <label for="ticket_link">Ticket Link</label>
-            <input type="url" id="ticket_link" name="ticket_link">
+            <input type="url" id="ticket_link" name="ticket_link" placeholder="https://...">
         </div>
         <div class="form-group">
             <label for="image">Event Image</label>
