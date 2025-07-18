@@ -109,17 +109,21 @@
 
 /* Event Title */
 .event-title {
-    font-family: 'Pirata One', cursive; /* Apply Pirata One font */
     font-size: 2.4rem;
     font-weight: bold;
     margin: 5px 0;
     color: #ec220c;
     transition: color 0.3s ease;
+    display: inline-block;
+    position: relative;
 }
 
-.event-card:hover .event-title {
+.event-title:hover {
     color: #b22222;
     text-decoration: underline;
+    text-underline-offset: 3px; /* adds a little space below the text */
+    text-decoration-thickness: 2px; /* makes the underline a bit bolder */
+    text-decoration-color: #b22222;
 }
 
 /* Spacer */
@@ -256,5 +260,20 @@
   height: auto;
   display: block;
   background-color: #222;
+}
+
+/* Prevent underline on all text inside event links except the event title */
+.events-grid a:hover,
+.events-grid a:hover * {
+    text-decoration: none;
+}
+
+.events-grid a:hover .event-title,
+.events-grid a:focus .event-title {
+    text-decoration: underline;
+    text-underline-offset: 3px;
+    text-decoration-thickness: 2px;
+    text-decoration-color: #b22222;
+    color: #b22222;
 }
 

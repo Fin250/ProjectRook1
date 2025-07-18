@@ -61,8 +61,8 @@ def login_required(f):
     return decorated_function
 
 users = {
-    "totpresents": bcrypt.generate_password_hash("totpresents").decode("utf-8"),
-    "hammerdown": bcrypt.generate_password_hash("hammerdown").decode("utf-8"),
+    "Colmsweet": bcrypt.generate_password_hash("fin").decode("utf-8"),
+    "Hammerdownteam": bcrypt.generate_password_hash("fin").decode("utf-8"),
     "fin": bcrypt.generate_password_hash("fin").decode("utf-8"),
 }
 
@@ -238,9 +238,11 @@ def login():
         username = request.form.get("username")
         password = request.form.get("password")
 
-        if username in users and bcrypt.check_password_hash(users[username], password):
-            session["user"] = username
-            flash("Login successful!", "success")
+        # Make username check case-insensitive
+        username_lookup = next((u for u in users if u.lower() == username.lower()), None)
+
+        if username_lookup and bcrypt.check_password_hash(users[username_lookup], password):
+            session["user"] = username_lookup
             return redirect(url_for("admin"))
         else:
             flash("Invalid username or password", "danger")
