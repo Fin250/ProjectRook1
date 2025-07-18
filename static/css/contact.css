@@ -19,9 +19,11 @@
 
 .contact-cards {
     display: flex;
+    flex-direction: row; /* Side-by-side */
     gap: 40px;
     justify-content: center;
     flex-wrap: wrap;
+    align-items: stretch;
 }
 
 .contact-card {

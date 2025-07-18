@@ -7,6 +7,7 @@
     border-radius: 12px;
     box-shadow: 0 4px 16px rgba(0,0,0,0.5);
     color: #faa400;
+    position: relative; /* Add this to position children absolutely within */
 }
 
 .login-section h2 {
@@ -81,8 +82,8 @@
 
 .back-arrow {
     position: absolute;
-    top: 0;
-    left: 0;
+    top: 18px;
+    left: 18px;
     z-index: 10;
     display: inline-block;
     transition: transform 0.15s;
@@ -97,32 +98,8 @@
 }
 @media (max-width: 600px) {
     .back-arrow {
-        top: 0;
-        left: 0;
-    }
-}
-
-.back-arrow {
-    position: absolute;
-    top: 32px;
-    left: 32px;
-    z-index: 10;
-    display: inline-block;
-    transition: transform 0.15s;
-    border-radius: 50%;
-    background: transparent;
-    padding: 4px;
-}
-.back-arrow:hover svg path,
-.back-arrow:focus svg path {
-    stroke: #faa400;
-    transform: scale(1.1);
-}
-
-@media (max-width: 600px) {
-    .back-arrow {
-        top: 12px;
-        left: 12px;
+        top: 8px;
+        left: 8px;
     }
 }
 
