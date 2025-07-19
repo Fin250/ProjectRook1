@@ -173,8 +173,8 @@ footer .footer-section.tot::after {
 }
 
 .footer-icon {
-    width: 24px;
-    height: 24px;
+    width: 20px;
+    height: 20px;
     object-fit: contain;
     vertical-align: middle;
     margin-right: 6px;
