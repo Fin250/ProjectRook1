@@ -2,15 +2,18 @@
 .hero {
     position: relative;
     overflow: hidden;
-    height: 600px;
+    width: 100%;
+    aspect-ratio: 7 / 3;
     background-color: #111;
 }
 
 .hero .slideshow img {
-    position: absolute;
     width: 100%;
     height: 100%;
     object-fit: cover;
+    position: absolute;
+    top: 0;
+    left: 0;
     opacity: 0;
     transition: opacity 1s ease-in-out;
 }
@@ -277,7 +280,6 @@
     color: #b22222;
 }
 
-/* Past Events Section */
 .past-events {
     padding: 40px 20px;
     background-color: #111;
@@ -292,3 +294,40 @@
     margin-bottom: 20px;
     letter-spacing: 1px;
 }
+
+@media (max-width: 1024px) {
+    .events-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 640px) {
+    .events-grid {
+        grid-template-columns: 1fr;
+        padding: 10px;
+    }
+
+    .event-card {
+        height: auto;
+    }
+
+    .event-title {
+        font-size: 1.8rem;
+    }
+
+    .venue-description h2,
+    .upcoming-events h2 {
+        font-size: 2.5rem;
+    }
+
+    .venue-description p {
+        font-size: 1.2rem;
+    }
+
+    .event-datetime,
+    .event-time,
+    .event-date-text {
+        font-size: 0.9rem;
+    }
+}
+

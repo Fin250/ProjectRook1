@@ -96,3 +96,37 @@
     font-size: 0.85rem;
     color: #f5c518;
 }
+
+/* --- Add at the end of your podcast.css --- */
+@media (max-width: 700px) {
+    .podcast-section {
+        padding: 10px 2vw;
+    }
+    .podcast-section h1 {
+        font-size: 1.5rem;
+        margin-top: 1rem;
+        margin-bottom: 0.8rem;
+    }
+    .recent-video {
+        padding-bottom: 65vw; /* Make video taller on mobile */
+        margin-bottom: 18px;
+    }
+    .subscribe-container {
+        margin-top: 24px;
+        margin-bottom: 24px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+    .subscribe-button {
+        font-size: 1rem;
+        padding: 10px 8vw;
+        border-radius: 22px;
+        white-space: normal;
+        min-width: 0;
+        max-width: 100%;
+        text-align: center;
+        box-sizing: border-box;
+        word-break: break-word;
+    }
+}

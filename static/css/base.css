@@ -89,7 +89,7 @@ footer {
     align-items: stretch; /* <-- changed from flex-start to stretch */
     background-color: #1a1a1a;
     color: #f5c518;
-    padding-bottom: 20px;
+    padding: 20px;
     border-top: 3px solid #f5c518;
     border-radius: 10px 10px 0 0;
     overflow: hidden;
@@ -205,6 +205,11 @@ footer .footer-section.tot::after {
 
 /* Responsive Design */
 @media (max-width: 768px) {
+
+    header {
+        padding: 10px 15px;
+    }
+
     /* Header Navigation */
     header nav ul {
         flex-direction: row;
@@ -277,10 +282,6 @@ footer .footer-section.tot::after {
 
     footer .footer-section p.short {
         display: block;
-    }
-
-    main, header, footer {
-        max-width: 95%;
     }
 
     footer .footer-section.tot::before,

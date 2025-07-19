@@ -78,13 +78,23 @@
 }
 
 @media (max-width: 900px) {
+    .contact-section {
+        padding-left: 4vw;
+        padding-right: 4vw;
+        box-sizing: border-box;
+    }
     .contact-cards {
         flex-direction: column;
         gap: 28px;
         align-items: center;
+        width: 100%;
+        box-sizing: border-box;
     }
     .contact-card {
         max-width: 100%;
         width: 100%;
+        box-sizing: border-box;
+        padding-left: 4vw;
+        padding-right: 4vw;
     }
 }

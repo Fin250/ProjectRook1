@@ -11,12 +11,14 @@ from flask_sqlalchemy import SQLAlchemy
 from flask_bcrypt import Bcrypt
 from flask_limiter import Limiter
 from flask_limiter.util import get_remote_address
-
 from werkzeug.utils import secure_filename
 from functools import wraps
 from datetime import datetime, timedelta
 import os
 import requests
+import uuid
+from collections import defaultdict
+from time import time
 
 app = Flask(__name__)
 app.secret_key = os.environ.get("SECRET_KEY", "devfallbacksecret")
@@ -24,12 +26,11 @@ app.config["UPLOAD_FOLDER"] = "static/uploads"
 app.config["ALLOWED_EXTENSIONS"] = {"png", "jpg", "jpeg", "gif"}
 app.config["SQLALCHEMY_DATABASE_URI"] = "sqlite:///site.db"
 app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
-app.config["MAX_CONTENT_LENGTH"] = 25 * 1024 * 1024  # 25 MB file upload limit
+app.config["MAX_CONTENT_LENGTH"] = 25 * 1024 * 1024
 
 db = SQLAlchemy(app)
 bcrypt = Bcrypt(app)
 
-# Rate limiter
 limiter = Limiter(get_remote_address, app=app, default_limits=["200 per day", "50 per hour"])
 
 class Event(db.Model):
@@ -42,6 +43,7 @@ class Event(db.Model):
     image_url = db.Column(db.String(200), nullable=False)
     ticket_link = db.Column(db.String(300), nullable=True)
     created_at = db.Column(db.DateTime, default=datetime.utcnow)
+    __table_args__ = (db.UniqueConstraint("title", "date", "time", name="_event_uc"),)
 
 def allowed_file(filename):
     return "." in filename and filename.rsplit(".", 1)[1].lower() in app.config["ALLOWED_EXTENSIONS"]
@@ -79,8 +81,7 @@ def get_recent_videos():
         response = requests.get(url)
         response.raise_for_status()
         data = response.json()
-    except Exception as e:
-        app.logger.error(f"YouTube API error: {e}")
+    except Exception:
         return []
 
     videos = []
@@ -140,13 +141,12 @@ def add_event():
             flash("Event date must be in the future", "danger")
             return redirect(request.url)
 
-        # Check for duplicates
         existing = Event.query.filter_by(title=title, date=date, time=time).first()
         if existing:
             flash("An event with the same title, date, and time already exists.", "danger")
             return redirect(request.url)
 
-        filename = secure_filename(file.filename)
+        filename = f"{uuid.uuid4().hex}_{secure_filename(file.filename)}"
         file.save(os.path.join(app.config["UPLOAD_FOLDER"], filename))
         image_url = f"uploads/{filename}"
 
@@ -204,7 +204,7 @@ def edit_event(event_id):
 
         file = request.files.get("image")
         if file and allowed_file(file.filename):
-            filename = secure_filename(file.filename)
+            filename = f"{uuid.uuid4().hex}_{secure_filename(file.filename)}"
             file.save(os.path.join(app.config["UPLOAD_FOLDER"], filename))
             event.image_url = f"uploads/{filename}"
 
@@ -225,26 +225,40 @@ def upload():
             flash("No selected file", "danger")
             return redirect(request.url)
         if file and allowed_file(file.filename):
-            filename = secure_filename(file.filename)
+            filename = f"{uuid.uuid4().hex}_{secure_filename(file.filename)}"
             file.save(os.path.join(app.config["UPLOAD_FOLDER"], filename))
             flash("File uploaded successfully!", "success")
             return redirect(url_for("upload"))
     return render_template("upload.html")
 
+failed_logins = defaultdict(list)
+MAX_ATTEMPTS = 10
+WINDOW_SECONDS = 60
+
 @app.route("/login", methods=["GET", "POST"])
-@limiter.limit("5 per minute")
 def login():
+    ip = get_remote_address()
+
+    now = time()
+    failed_attempts = failed_logins[ip]
+    failed_attempts = [t for t in failed_attempts if now - t < WINDOW_SECONDS]
+    failed_logins[ip] = failed_attempts
+
+    if len(failed_attempts) >= MAX_ATTEMPTS:
+        flash("Too many attempts, try again in a minute", "danger")
+        return render_template("login.html")
+
     if request.method == "POST":
         username = request.form.get("username")
         password = request.form.get("password")
-
-        # Make username check case-insensitive
         username_lookup = next((u for u in users if u.lower() == username.lower()), None)
 
         if username_lookup and bcrypt.check_password_hash(users[username_lookup], password):
             session["user"] = username_lookup
+            failed_logins[ip] = []
             return redirect(url_for("admin"))
         else:
+            failed_logins[ip].append(now)
             flash("Invalid username or password", "danger")
             return redirect(request.url)
 
