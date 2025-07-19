@@ -19,9 +19,12 @@ import requests
 import uuid
 from collections import defaultdict
 from time import time
+from dotenv import load_dotenv
+
+load_dotenv()
 
 app = Flask(__name__)
-app.secret_key = os.environ.get("SECRET_KEY", "devfallbacksecret")
+app.secret_key = os.environ.get("SECRET_KEY", "fallbacksecret")
 app.config["UPLOAD_FOLDER"] = "static/uploads"
 app.config["ALLOWED_EXTENSIONS"] = {"png", "jpg", "jpeg", "gif"}
 app.config["SQLALCHEMY_DATABASE_URI"] = "sqlite:///site.db"
@@ -32,6 +35,13 @@ db = SQLAlchemy(app)
 bcrypt = Bcrypt(app)
 
 limiter = Limiter(get_remote_address, app=app, default_limits=["200 per day", "50 per hour"])
+
+users_raw = os.environ.get("ADMIN_USERS", "")
+users = {}
+for pair in users_raw.split(","):
+    if ":" in pair:
+        username, password = pair.split(":", 1)
+        users[username] = bcrypt.generate_password_hash(password).decode("utf-8")
 
 class Event(db.Model):
     id = db.Column(db.Integer, primary_key=True)
@@ -61,12 +71,6 @@ def login_required(f):
             return redirect(url_for("login"))
         return f(*args, **kwargs)
     return decorated_function
-
-users = {
-    "Colmsweet": bcrypt.generate_password_hash("fin").decode("utf-8"),
-    "Hammerdownteam": bcrypt.generate_password_hash("fin").decode("utf-8"),
-    "fin": bcrypt.generate_password_hash("fin").decode("utf-8"),
-}
 
 YOUTUBE_API_KEY = os.environ.get("YOUTUBE_API_KEY", "")
 CHANNEL_ID = "UCDvFWE_kn242G_JzyuC_StA"
