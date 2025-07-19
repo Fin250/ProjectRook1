@@ -1,15 +1,48 @@
 {% extends "base.html" %}
 
+{% block title %}Edit Event | BuNker11{% endblock %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/admin.css') }}">
+{% endblock %}
+
 {% block content %}
-<h2>Edit Event</h2>
-<form method="POST" enctype="multipart/form-data">
-    <label>Title: <input type="text" name="title" value="{{ event.title }}" required></label><br>
-    <label>Date: <input type="date" name="date" value="{{ event.date }}" required></label><br>
-    <label>Time: <input type="time" name="time" required step="60" value="{{ event.time }}" required></label><br>
-    <label>Bands: <input type="text" name="bands" value="{{ event.bands }}"></label><br>
-    <label>Description:<br><textarea name="description">{{ event.description }}</textarea></label><br>
-    <label>Ticket Link: <input type="text" name="ticket_link" value="{{ event.ticket_link }}"></label><br>
-    <label>Image: <input type="file" name="image"></label><br>
-    <button type="submit">Update Event</button>
-</form>
+<section class="add-event-form">
+    <h2>Edit Event</h2>
+    <form method="POST" enctype="multipart/form-data" class="admin-form">
+        <div class="form-group">
+            <label for="title">Title</label>
+            <input type="text" id="title" name="title" value="{{ event.title }}" required autocomplete="off" placeholder="e.g. Metal Night at BuNker11">
+        </div>
+        <div class="form-row">
+            <div class="form-group">
+                <label for="date">Date</label>
+                <input type="date" id="date" name="date" value="{{ event.date.strftime('%Y-%m-%d') }}" required>
+            </div>
+            <div class="form-group">
+                <label for="time">Time <span style="font-weight:normal;color:#faa400;font-size:0.95em;">(doors open)</span></label>
+                <input type="time" id="time" name="time" value="{{ event.time.strftime('%H:%M') }}" required>
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="bands">Bands <span style="font-weight:normal;color:#faa400;font-size:0.95em;">(comma separated)</span></label>
+            <input type="text" id="bands" name="bands" value="{{ event.bands }}" placeholder="e.g. Band1, Band2, Band3">
+        </div>
+        <div class="form-group">
+            <label for="description">Description</label>
+            <textarea id="description" name="description" rows="3" placeholder="Event details, lineup, timings, etc.">{{ event.description }}</textarea>
+        </div>
+        <div class="form-group">
+            <label for="ticket_link">Ticket Link</label>
+            <input type="url" id="ticket_link" name="ticket_link" value="{{ event.ticket_link }}" placeholder="https://...">
+        </div>
+        <div class="form-group">
+            <label for="image">Event Image</label>
+            <input type="file" id="image" name="image" accept="image/*">
+        </div>
+        <div class="form-group">
+            <button type="submit">Update Event</button>
+        </div>
+    </form>
+</section>
 {% endblock %}

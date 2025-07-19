@@ -24,7 +24,7 @@ app.config["UPLOAD_FOLDER"] = "static/uploads"
 app.config["ALLOWED_EXTENSIONS"] = {"png", "jpg", "jpeg", "gif"}
 app.config["SQLALCHEMY_DATABASE_URI"] = "sqlite:///site.db"
 app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
-app.config["MAX_CONTENT_LENGTH"] = 5 * 1024 * 1024  # 5 MB file upload limit
+app.config["MAX_CONTENT_LENGTH"] = 25 * 1024 * 1024  # 25 MB file upload limit
 
 db = SQLAlchemy(app)
 bcrypt = Bcrypt(app)
@@ -55,7 +55,7 @@ def login_required(f):
     @wraps(f)
     def decorated_function(*args, **kwargs):
         if "user" not in session:
-            flash("You must log in to access this page", "danger")
+            flash("You must login to access this page", "danger")
             return redirect(url_for("login"))
         return f(*args, **kwargs)
     return decorated_function
