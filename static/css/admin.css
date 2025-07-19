@@ -1,4 +1,3 @@
-/* Admin Section */
 .admin-section {
     max-width: 90%;
     margin: 40px auto;
@@ -9,7 +8,6 @@
     color: #f5c518;
 }
 
-/* Admin Header */
 .admin-header {
     display: flex;
     justify-content: space-between;
@@ -24,7 +22,6 @@
     letter-spacing: 1px;
 }
 
-/* Logout Button */
 .logout-button {
     background-color: #ec220c;
     color: #ffffff;
@@ -43,7 +40,6 @@
     transform: scale(1.05);
 }
 
-/* Add Event Button */
 .add-event-button {
     background-color: #28a745;
     border: none;
@@ -67,7 +63,6 @@
     background-color: #218838;
 }
 
-/* Events Grid */
 .events-grid {
     font-family: 'Alike Angular', serif;
     display: grid;
@@ -75,7 +70,6 @@
     gap: 25px;
 }
 
-/* Event Card */
 .event-card {
     display: flex;
     flex-direction: column;
@@ -122,7 +116,6 @@
     margin-bottom: 15px;
 }
 
-/* Event Actions */
 .event-actions {
     display: flex;
     justify-content: center;
@@ -148,7 +141,6 @@
     opacity: 0.8;
 }
 
-/* Add Event Form */
 .add-event-form {
     display: block;
     margin-top: 40px;
@@ -171,7 +163,6 @@
     display: none;
 }
 
-/* Admin Form */
 .admin-form {
     display: flex;
     flex-direction: column;
@@ -194,7 +185,7 @@
 
 .admin-form .form-group input,
 .admin-form .form-group textarea {
-    background-color: #cac5c5; /* Softer light gray */
+    background-color: #cac5c5;
     color: #111;
     border: 1.5px solid #f5c518;
     border-radius: 8px;
@@ -213,7 +204,6 @@
     color: #111;
 }
 
-/* Make date/time inputs easier to type in */
 .admin-form input[type="date"],
 .admin-form input[type="time"] {
     font-family: inherit;
@@ -243,7 +233,6 @@
     opacity: 1;
 }
 
-/* Form Row */
 .form-row {
     display: flex;
     gap: 20px;
@@ -255,7 +244,6 @@
     min-width: 140px;
 }
 
-/* Settings Modal */
 .settings-modal {
     position: fixed;
     top: 50%;
@@ -294,7 +282,6 @@
     transform: scale(1.05);
 }
 
-/* Admin Actions */
 .admin-actions {
     display: flex;
     justify-content: center;
@@ -347,7 +334,6 @@
     transform: scale(1.04);
 }
 
-/* Update Podcast Section */
 .update-podcast-section {
     background: #1a1a1a;
     color: #faa400;
@@ -378,11 +364,10 @@
     margin-bottom: 8px;
 }
 
-/* Icon styling for left of text */
 .admin-action-btn img {
     height: 28px;
     margin-right: 12px;
-    filter: brightness(0) invert(1); /* makes icon white if it's a dark SVG/PNG */
+    filter: brightness(0) invert(1);
 }
 
 @media (max-width: 900px) {

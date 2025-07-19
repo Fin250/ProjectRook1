@@ -1,11 +1,11 @@
 .event-detail-section {
-    max-width: 900px; /* Increased from 700px */
+    max-width: 900px;
     margin: 30px auto 80px auto;
     background: #1a1a1a;
     color: #faa400;
     border-radius: 12px;
     box-shadow: 0 4px 16px rgba(0,0,0,0.5);
-    padding: 48px 48px 40px 48px; /* More horizontal padding */
+    padding: 48px 48px 40px 48px;
     text-align: center;
 }
 

@@ -10,7 +10,6 @@
 <section class="podcast-section">
     <h1>TOT Presents Worthing Podcast</h1>
 
-    <!-- Most Recent Video Embed (Dynamic) -->
     <div class="recent-video">
         {% if podcast_url %}
             {% set video_id = podcast_url.split('v=')[-1].split('&')[0] if 'v=' in podcast_url else podcast_url.split('/')[-1] %}
@@ -32,14 +31,12 @@
         {% endif %}
     </div>
 
-    <!-- Subscribe Button -->
     <div class="subscribe-container">
         <a href="https://www.youtube.com/channel/{{ youtube_channel_id }}?sub_confirmation=1" target="_blank" class="subscribe-button">
             Subscribe to TOT Presents Worthing Podcast
         </a>
     </div>
 
-    <!-- Recent Videos Gallery -->
     <div class="video-gallery">
         {% for video in recent_videos %}
         <a href="https://www.youtube.com/watch?v={{ video.id }}" target="_blank" class="video-thumb" title="{{ video.title }}">

@@ -1,4 +1,3 @@
-/* General Styles */
 html, body {
     height: 100%;
     min-height: 100%;
@@ -36,7 +35,6 @@ main {
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
 }
 
-/* Header Styles */
 header {
     display: flex;
     justify-content: space-between;
@@ -82,11 +80,10 @@ nav ul li a.active {
     font-weight: bold;
 }
 
-/* Footer Styles */
 footer {
     display: flex;
     justify-content: space-between;
-    align-items: stretch; /* <-- changed from flex-start to stretch */
+    align-items: stretch;
     background-color: #1a1a1a;
     color: #f5c518;
     padding: 20px;
@@ -102,10 +99,10 @@ footer .footer-section {
     margin: 0 10px;
     display: flex;
     flex-direction: column;
-    align-items: center;      /* Center horizontally */
-    justify-content: flex-start; /* Align content to the top */
+    align-items: center;
+    justify-content: flex-start;
     height: 100%;
-    padding-top: 10px;        /* Optional: add some top padding for spacing */
+    padding-top: 10px;
 }
 
 footer .footer-section ul,
@@ -121,7 +118,7 @@ footer .footer-section p.short {
 
 footer .footer-section h4 {
     color: #ec220c;
-    margin-bottom: 18px; /* Increased spacing below h4 */
+    margin-bottom: 18px;
     font-size: 1rem;
     display: flex;
     align-items: center;
@@ -137,13 +134,12 @@ footer .footer-section ul {
     justify-content: center;
     gap: 10px;
     flex-direction: row;
-    gap: 22px; /* Increased gap between social media icons/links */
+    gap: 22px;
     margin-top: 8px;
     margin-bottom: 0;
     padding: 0;
 }
 
-/* Footer Social Media Links */
 footer .footer-section ul li a {
     color: #f5c518;
     font-size: 1rem;
@@ -203,14 +199,12 @@ footer .footer-section.tot::after {
     margin-right: 6px;
 }
 
-/* Responsive Design */
 @media (max-width: 768px) {
 
     header {
         padding: 10px 15px;
     }
 
-    /* Header Navigation */
     header nav ul {
         flex-direction: row;
         flex-wrap: wrap;
@@ -231,7 +225,6 @@ footer .footer-section.tot::after {
         max-height: 35px;
     }
 
-    /* Footer */
     footer {
         flex-direction: column;
         align-items: center;
@@ -266,7 +259,6 @@ footer .footer-section.tot::after {
         font-size: 0.8rem;
     }
 
-    /* Shortened Address */
     footer .footer-section p {
         display: none;
     }
@@ -275,7 +267,6 @@ footer .footer-section.tot::after {
         display: block;
     }
 
-    /* Mobile Address Visibility */
     footer .footer-section p.full {
         display: none;
     }

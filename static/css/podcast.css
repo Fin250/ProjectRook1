@@ -1,5 +1,5 @@
 .podcast-section {
-    color: #d4af37; /* Your gold */
+    color: #d4af37;
     font-family: 'Alike Angular', serif;
     max-width: 1000px;
     margin: 0 auto;
@@ -7,20 +7,19 @@
 }
 
 .podcast-section h1 {
-    color: #ec220c; /* Red highlight */
+    color: #ec220c;
     text-align: center;
     font-size: 4rem;
     margin-top: 2rem;
     margin-bottom: 1rem;
 }
 
-/* Most Recent Video */
 .recent-video {
     position: relative;
-    padding-bottom: 56.25%; /* 16:9 aspect ratio */
+    padding-bottom: 56.25%;
     height: 0;
     overflow: hidden;
-    border: 3px solid #f5c518; /* Yellow border */
+    border: 3px solid #f5c518;
     border-radius: 12px;
     margin-bottom: 30px;
 }
@@ -34,7 +33,6 @@
     border-radius: 12px;
 }
 
-/* Subscribe Button */
 .subscribe-container {
     text-align: center;
     margin-top: 60px;
@@ -58,7 +56,6 @@
     box-shadow: 0 0 20px #ec220c;
 }
 
-/* Recent Videos Gallery */
 .video-gallery {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
@@ -97,7 +94,6 @@
     color: #f5c518;
 }
 
-/* --- Add at the end of your podcast.css --- */
 @media (max-width: 700px) {
     .podcast-section {
         padding: 10px 2vw;
@@ -108,7 +104,7 @@
         margin-bottom: 0.8rem;
     }
     .recent-video {
-        padding-bottom: 65vw; /* Make video taller on mobile */
+        padding-bottom: 65vw;
         margin-bottom: 18px;
     }
     .subscribe-container {

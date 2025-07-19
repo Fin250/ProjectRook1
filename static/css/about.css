@@ -27,7 +27,7 @@
 
 .about-team-cards {
     display: flex;
-    flex-direction: column; /* Stack cards vertically */
+    flex-direction: column;
     gap: 28px;
     justify-content: center;
     margin: 36px 0 0 0;
@@ -35,7 +35,6 @@
 }
 
 .about-highlight.about-team-card {
-    /* Remove flex: 1 1 320px; */
     min-width: 240px;
     width: 90%;
     background: #222;
