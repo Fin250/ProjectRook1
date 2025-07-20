@@ -7,7 +7,7 @@ body {
     margin: 0;
     padding: 0;
     font-family: 'Alike Angular', serif;
-    background: url('../images/background1.jpg') no-repeat center center fixed;
+    background: url('../images/background1.webp') no-repeat center center fixed;
     background-size: cover;
     color: #d4af37;
     line-height: 1.6;
@@ -116,7 +116,7 @@ footer .footer-section p.short {
     justify-content: center;
 }
 
-footer .footer-section h4 {
+footer .footer-section p.footer-heading {
     color: #F43A25;
     margin-bottom: 18px;
     font-size: 1rem;
@@ -255,7 +255,7 @@ footer .footer-section.tot::after {
         height: 16px;
     }
 
-    footer .footer-section h4 {
+    footer .footer-section p {
         font-size: 0.8rem;
     }
 

@@ -4,7 +4,6 @@
 
 {% block extra_css %}
 <link rel="stylesheet" href="{{ url_for('static', filename='css/podcast.css') }}">
-<link rel="stylesheet" href="{{ url_for('static', filename='css/lite-yt-embed.css') }}">
 {% endblock %}
 
 {% block extra_js %}
@@ -18,18 +17,41 @@
     <div class="recent-video">
         {% if podcast_url %}
             {% set video_id = podcast_url.split('v=')[-1].split('&')[0] if 'v=' in podcast_url else podcast_url.split('/')[-1] %}
-            <lite-youtube videoid="{{ video_id }}" style="background-image: url('https://i.ytimg.com/vi/{{ video_id }}/sddefault.jpg');">
-                <noscript>
-                    <a href="https://www.youtube.com/watch?v={{ video_id }}">Watch on YouTube</a>
-                </noscript>
-            </lite-youtube>
-        {% else %}
-            <lite-youtube videoid="-3KvXitcFkk" style="background-image: url('https://i.ytimg.com/vi/-3KvXitcFkk/hqdefault.jpg');">
-                <noscript>
-                    <a href="https://www.youtube.com/watch?v=-3KvXitcFkk">Watch on YouTube</a>
-                </noscript>
-            </lite-youtube>
-        {% endif %}
+                <lite-youtube
+                    videoid="{{ video_id }}"
+                    style="--ytimg: url('https://i.ytimg.com/vi/{{ video_id }}/sddefault.jpg');"
+                    data-title="">
+                    <img
+                        src="https://i.ytimg.com/vi/{{ video_id }}/sddefault.jpg"
+                        alt="Latest Podcast Video"
+                        fetchpriority="high"
+                        decoding="async"
+                        width="640"
+                        height="360"
+                        style="display: none;">
+                    <noscript>
+                        <a href="https://www.youtube.com/watch?v={{ video_id }}">Watch on YouTube</a>
+                    </noscript>
+                </lite-youtube>
+            {% else %}
+                <lite-youtube
+                    videoid="-3KvXitcFkk"
+                    style="--ytimg: url('https://i.ytimg.com/vi/-3KvXitcFkk/sddefault.jpg');"
+                    data-title="">
+                    <img
+                        src="https://i.ytimg.com/vi/-3KvXitcFkk/sddefault.jpg"
+                        alt="Latest Podcast Video"
+                        fetchpriority="high"
+                        decoding="async"
+                        width="640"
+                        height="360"
+                        style="display: none;">
+                    <noscript>
+                        <a href="https://www.youtube.com/watch?v=-3KvXitcFkk">Watch on YouTube</a>
+                    </noscript>
+                </lite-youtube>
+            {% endif %}
+
     </div>
 
     <div class="subscribe-container">
