@@ -4,6 +4,11 @@
 
 {% block extra_css %}
 <link rel="stylesheet" href="{{ url_for('static', filename='css/podcast.css') }}">
+<link rel="stylesheet" href="{{ url_for('static', filename='css/lite-yt-embed.css') }}">
+{% endblock %}
+
+{% block extra_js %}
+<script src="{{ url_for('static', filename='scripts/lite-yt-embed.js') }}" type="module"></script>
 {% endblock %}
 
 {% block content %}
@@ -13,21 +18,17 @@
     <div class="recent-video">
         {% if podcast_url %}
             {% set video_id = podcast_url.split('v=')[-1].split('&')[0] if 'v=' in podcast_url else podcast_url.split('/')[-1] %}
-            <iframe 
-                src="https://www.youtube.com/embed/{{ video_id }}"
-                title="Latest Podcast Video" 
-                frameborder="0" 
-                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
-                allowfullscreen>
-            </iframe>
+            <lite-youtube videoid="{{ video_id }}" style="background-image: url('https://i.ytimg.com/vi/{{ video_id }}/sddefault.jpg');">
+                <noscript>
+                    <a href="https://www.youtube.com/watch?v={{ video_id }}">Watch on YouTube</a>
+                </noscript>
+            </lite-youtube>
         {% else %}
-            <iframe 
-                src="https://www.youtube.com/embed/-3KvXitcFkk"
-                title="Latest Podcast Video" 
-                frameborder="0" 
-                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
-                allowfullscreen>
-            </iframe>
+            <lite-youtube videoid="-3KvXitcFkk" style="background-image: url('https://i.ytimg.com/vi/-3KvXitcFkk/hqdefault.jpg');">
+                <noscript>
+                    <a href="https://www.youtube.com/watch?v=-3KvXitcFkk">Watch on YouTube</a>
+                </noscript>
+            </lite-youtube>
         {% endif %}
     </div>
 
@@ -40,7 +41,7 @@
     <div class="video-gallery">
         {% for video in recent_videos %}
         <a href="https://www.youtube.com/watch?v={{ video.id }}" target="_blank" class="video-thumb" title="{{ video.title }}">
-            <img src="{{ video.thumbnail }}" alt="{{ video.title }}">
+            <img src="{{ video.thumbnail }}" alt="{{ video.title }}" loading="lazy">
             <span class="video-title">{{ video.title }}</span>
         </a>
         {% endfor %}
