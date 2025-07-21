@@ -8,6 +8,19 @@
 
 {% block extra_js %}
 <script src="{{ url_for('static', filename='scripts/lite-yt-embed.js') }}" type="module"></script>
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+    const img = document.getElementById('podcast-thumbnail');
+    if (!img) return;
+
+    img.onerror = function () {
+        const fallback = img.getAttribute('data-fallback');
+        if (fallback) {
+            img.src = fallback;
+        }
+    };
+});
+</script>
 {% endblock %}
 
 {% block content %}
@@ -17,41 +30,29 @@
     <div class="recent-video">
         {% if podcast_url %}
             {% set video_id = podcast_url.split('v=')[-1].split('&')[0] if 'v=' in podcast_url else podcast_url.split('/')[-1] %}
-                <lite-youtube
-                    videoid="{{ video_id }}"
-                    style="--ytimg: url('https://i.ytimg.com/vi/{{ video_id }}/sddefault.jpg');"
-                    data-title="">
-                    <img
-                        src="https://i.ytimg.com/vi/{{ video_id }}/sddefault.jpg"
-                        alt="Latest Podcast Video"
-                        fetchpriority="high"
-                        decoding="async"
-                        width="640"
-                        height="360"
-                        style="display: none;">
-                    <noscript>
-                        <a href="https://www.youtube.com/watch?v={{ video_id }}">Watch on YouTube</a>
-                    </noscript>
-                </lite-youtube>
-            {% else %}
-                <lite-youtube
-                    videoid="-3KvXitcFkk"
-                    style="--ytimg: url('https://i.ytimg.com/vi/-3KvXitcFkk/sddefault.jpg');"
-                    data-title="">
-                    <img
-                        src="https://i.ytimg.com/vi/-3KvXitcFkk/sddefault.jpg"
-                        alt="Latest Podcast Video"
-                        fetchpriority="high"
-                        decoding="async"
-                        width="640"
-                        height="360"
-                        style="display: none;">
-                    <noscript>
-                        <a href="https://www.youtube.com/watch?v=-3KvXitcFkk">Watch on YouTube</a>
-                    </noscript>
-                </lite-youtube>
-            {% endif %}
+        {% else %}
+            {% set video_id = "-3KvXitcFkk" %}
+        {% endif %}
 
+        <img
+            id="podcast-thumbnail"
+            src="https://i.ytimg.com/vi/{{ video_id }}/maxresdefault.jpg"
+            data-fallback="https://i.ytimg.com/vi/{{ video_id }}/sddefault.jpg"
+            alt="Latest Podcast Video"
+            fetchpriority="high"
+            decoding="async"
+            width="640"
+            height="480"
+            class="lcp-poster">
+
+        <lite-youtube
+            videoid="{{ video_id }}"
+            style="--ytimg: url('https://i.ytimg.com/vi/{{ video_id }}/maxresdefault.jpg');"
+            data-title="">
+            <noscript>
+                <a href="https://www.youtube.com/watch?v={{ video_id }}">Watch on YouTube</a>
+            </noscript>
+        </lite-youtube>
     </div>
 
     <div class="subscribe-container">

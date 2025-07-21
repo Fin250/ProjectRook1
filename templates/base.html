@@ -15,7 +15,10 @@
     <meta name="twitter:description" content="Discover upcoming gigs and explore past events at BuNker11.">
     <meta name="twitter:image" content="{{ url_for('static', filename='images/og-image.jpg') }}">
     <title>{% block title %}BuNker11 - Live Music and Events{% endblock %}</title>
+    
     <link rel="stylesheet" href="{{ url_for('static', filename='css/base.css') }}">
+    <link rel="preload" href="{{ url_for('static', filename='fonts/alike-angular-v26-latin-regular.woff2') }}" as="font" type="font/woff2" crossorigin="anonymous">
+
     {% block extra_css %}
     <!-- Page-specific CSS -->
     {% endblock %}
