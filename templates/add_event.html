@@ -46,3 +46,17 @@
     </form>
 </section>
 {% endblock %}
+
+{% block extra_js %}
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+    const timeInput = document.getElementById("time");
+    timeInput.addEventListener("focus", function () {
+        if (!timeInput.value) {
+            timeInput.value = "18:00";
+            timeInput.select();
+        }
+    });
+});
+</script>
+{% endblock %}

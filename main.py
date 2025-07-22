@@ -20,13 +20,15 @@ import uuid
 from collections import defaultdict
 from time import time
 from dotenv import load_dotenv
+from io import BytesIO
+from PIL import Image
 
 load_dotenv()
 
 app = Flask(__name__)
 app.secret_key = os.environ.get("SECRET_KEY", "fallbacksecret")
 app.config["UPLOAD_FOLDER"] = "static/uploads"
-app.config["ALLOWED_EXTENSIONS"] = {"png", "jpg", "jpeg", "gif"}
+app.config["ALLOWED_EXTENSIONS"] = {"png", "jpg", "jpeg", "gif","webp"}
 app.config["SQLALCHEMY_DATABASE_URI"] = "sqlite:///site.db"
 app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
 app.config["MAX_CONTENT_LENGTH"] = 25 * 1024 * 1024
@@ -72,31 +74,37 @@ def login_required(f):
         return f(*args, **kwargs)
     return decorated_function
 
-YOUTUBE_API_KEY = os.environ.get("YOUTUBE_API_KEY", "")
-CHANNEL_ID = "UCDvFWE_kn242G_JzyuC_StA"
+def process_image(file_storage, upload_folder):
+    image = Image.open(file_storage)
+    image_format = image.format
+    filename_base = uuid.uuid4().hex
 
-def get_recent_videos():
-    url = (
-        "https://www.googleapis.com/youtube/v3/search"
-        "?key={key}&channelId={channel}&part=snippet,id&order=date&maxResults=10"
-    ).format(key=YOUTUBE_API_KEY, channel=CHANNEL_ID)
+    if image.width > 1000:
+        ratio = 1000 / float(image.width)
+        new_height = int(image.height * ratio)
+        image = image.resize((1000, new_height), Image.LANCZOS)
 
-    try:
-        response = requests.get(url)
-        response.raise_for_status()
-        data = response.json()
-    except Exception:
-        return []
+    original_io = BytesIO()
+    image.save(original_io, format=image_format)
+    original_data = original_io.getvalue()
 
-    videos = []
-    for item in data.get("items", []):
-        if item["id"]["kind"] == "youtube#video":
-            videos.append({
-                "id": item["id"]["videoId"],
-                "title": item["snippet"]["title"],
-                "thumbnail": item["snippet"]["thumbnails"]["medium"]["url"]
-            })
-    return videos
+    webp_io = BytesIO()
+    image.save(webp_io, format="WEBP", lossless=True)
+    webp_data = webp_io.getvalue()
+
+    if len(webp_data) < len(original_data):
+        ext = "webp"
+        final_data = webp_data
+    else:
+        ext = image_format.lower()
+        final_data = original_data
+
+    final_filename = f"{filename_base}.{ext}"
+    save_path = os.path.join(upload_folder, final_filename)
+    with open(save_path, "wb") as f:
+        f.write(final_data)
+
+    return f"uploads/{final_filename}"
 
 @app.route("/")
 def home():
@@ -150,9 +158,7 @@ def add_event():
             flash("An event with the same title, date, and time already exists.", "danger")
             return redirect(request.url)
 
-        filename = f"{uuid.uuid4().hex}_{secure_filename(file.filename)}"
-        file.save(os.path.join(app.config["UPLOAD_FOLDER"], filename))
-        image_url = f"uploads/{filename}"
+        image_url = process_image(file, app.config["UPLOAD_FOLDER"])
 
         new_event = Event(
             title=title,
@@ -208,9 +214,7 @@ def edit_event(event_id):
 
         file = request.files.get("image")
         if file and allowed_file(file.filename):
-            filename = f"{uuid.uuid4().hex}_{secure_filename(file.filename)}"
-            file.save(os.path.join(app.config["UPLOAD_FOLDER"], filename))
-            event.image_url = f"uploads/{filename}"
+            event.image_url = process_image(file, app.config["UPLOAD_FOLDER"])
 
         db.session.commit()
         flash("Event updated successfully!", "success")
@@ -300,21 +304,16 @@ def about():
 
 @app.route("/podcast")
 def podcast():
-    recent_videos = get_recent_videos()
-    latest_video_id = recent_videos[0]["id"] if recent_videos else None
-
     podcast_url_file = "podcast_url.txt"
     podcast_url = ""
+
     if os.path.exists(podcast_url_file):
         with open(podcast_url_file, "r") as f:
             podcast_url = f.read().strip()
 
     return render_template(
         "podcast.html",
-        latest_video_id=latest_video_id,
-        recent_videos=recent_videos,
-        youtube_channel_id=CHANNEL_ID,
-        podcast_url=podcast_url,
+        podcast_url=podcast_url
     )
 
 @app.route("/event/<event_id_title>")
@@ -332,6 +331,7 @@ def event_detail(event_id_title):
 def update_podcast():
     podcast_url_file = "podcast_url.txt"
     current_url = ""
+
     if os.path.exists(podcast_url_file):
         with open(podcast_url_file, "r") as f:
             current_url = f.read().strip()
