@@ -31,7 +31,7 @@
 .venue-description {
     font-family: 'Alike Angular', serif;
     text-align: center;
-    padding: 20px 20px 40px 20px;
+    padding: 20px;
     background-color: #222;
     color: #faa400;
 }
@@ -39,7 +39,7 @@
 .venue-description h2 {
     color: #ec220c;
     margin-bottom: 20px;
-    margin-top: 20px;
+    margin-top: 0px;
     font-size: 4rem;
 }
 
@@ -57,8 +57,8 @@
 .upcoming-events h2 {
     font-family: 'Alike Angular', serif;
     color: #ec220c;
-    margin-bottom: 5px;
-    margin-top: 5px;
+    margin-bottom: 0px;
+    margin-top: 0px;
     text-align: center;
     font-size: 4rem;
 }
