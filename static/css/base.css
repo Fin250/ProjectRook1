@@ -13,6 +13,7 @@ body {
     line-height: 1.6;
     display: flex;
     flex-direction: column;
+    overflow-x: hidden;
 }
 
 a {
@@ -89,8 +90,8 @@ footer {
     padding: 20px;
     border-top: 3px solid #f5c518;
     border-radius: 10px 10px 0 0;
-    overflow: hidden;
     flex-shrink: 0;
+    flex-wrap: wrap;
 }
 
 footer .footer-section {
@@ -103,6 +104,10 @@ footer .footer-section {
     justify-content: flex-start;
     height: 100%;
     padding-top: 10px;
+    min-width: 0;
+    max-width: 100%;
+    word-break: break-word;
+    box-sizing: border-box;
 }
 
 footer .footer-section ul,
@@ -118,13 +123,14 @@ footer .footer-section p.short {
 
 footer .footer-section p.footer-heading {
     color: #F43A25;
-    margin-bottom: 18px;
+    margin-bottom: 10px;
     font-size: 1rem;
     display: flex;
     align-items: center;
     justify-content: center;
-    gap: 8px;
+    gap: 4px;
     width: 100%;
+    line-height: 1;
 }
 
 footer .footer-section ul {
@@ -132,12 +138,10 @@ footer .footer-section ul {
     padding: 0;
     display: flex;
     justify-content: center;
-    gap: 10px;
-    flex-direction: row;
     gap: 22px;
+    flex-direction: row;
     margin-top: 8px;
     margin-bottom: 0;
-    padding: 0;
 }
 
 footer .footer-section ul li a {
@@ -217,37 +221,44 @@ footer .footer-section.tot::after {
         padding: 5px 8px;
     }
 
-    header {
-        padding: 8px 10px;
-    }
-
     header .logo img {
         max-height: 35px;
     }
 
     footer {
-        flex-direction: column;
-        align-items: center;
-    }
-
-    footer .footer-section.address {
-        width: 100%;
-        margin-bottom: 20px;
+        flex-direction: row;
+        flex-wrap: nowrap;
+        padding: 10px;
     }
 
     footer .footer-section {
-        width: 100%;
-        margin: 10px 0;
+        flex: 1 1 33%;
+        margin: 0 5px;
+        padding-top: 5px;
+    }
+
+    footer .footer-section p.footer-heading {
+        font-size: 0.7rem;
+        margin-bottom: 10px;
     }
 
     footer .footer-section ul {
-        flex-direction: row;
-        justify-content: center;
+        flex-direction: column;
+        gap: 8px;
+        align-items: center;
+    }
+
+    footer .footer-section ul li {
+        width: max-content;
     }
 
     footer .footer-section ul li a {
-        font-size: 0.7rem;
-        gap: 3px;
+        display: inline-flex;
+        align-items: center;
+        justify-content: flex-start;
+        font-size: 0.75rem;
+        gap: 4px;
+        width: 100%;
     }
 
     footer .footer-section ul li a img {
@@ -256,15 +267,7 @@ footer .footer-section.tot::after {
     }
 
     footer .footer-section p {
-        font-size: 0.8rem;
-    }
-
-    footer .footer-section p {
-        display: none;
-    }
-
-    footer .footer-section p.short {
-        display: block;
+        font-size: 0.75rem;
     }
 
     footer .footer-section p.full {
@@ -275,8 +278,28 @@ footer .footer-section.tot::after {
         display: block;
     }
 
+    footer .footer-icon {
+        margin-right: 2px;
+        width: 16px;
+        height: 16px;
+    }
+
     footer .footer-section.tot::before,
     footer .footer-section.tot::after {
         display: none;
     }
+
+    footer .footer-section p.footer-heading::after {
+        content: attr(data-mobile-label);
+        display: inline;
+        margin-left: 4px;
+    }
+
+    footer .footer-section p.footer-heading .desktop-label {
+        display: none;
+    }
+}
+
+footer .footer-section {
+    outline: 1px dashed red;
 }
