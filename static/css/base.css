@@ -284,9 +284,17 @@ footer .footer-section.tot::after {
         height: 16px;
     }
 
-    footer .footer-section.tot::before,
+    footer .footer-section.tot::before {
+        left: -5px;
+    }
+
     footer .footer-section.tot::after {
-        display: none;
+        right: -5px;
+    }
+
+    footer .footer-section.tot::before, footer .footer-section.tot::after {
+        top: 30%;
+        bottom: 10%;
     }
 
     footer .footer-section p.footer-heading::after {
@@ -300,6 +308,28 @@ footer .footer-section.tot::after {
     }
 }
 
-footer .footer-section {
-    outline: 1px dashed red;
+@media (max-width: 440px) {
+
+    header {
+        justify-content: flex-start;
+        gap: 30px;
+        flex-wrap: wrap;
+    }
+
+    header nav ul {
+        justify-content: flex-start;
+    }
+
+    header .logo {
+        flex: 0 0 auto;
+    }
+
+    header nav {
+        flex: 1;
+    }
+
+    header nav ul li a {
+        font-size: 0.6rem;
+        padding: 4px 6px;
+    }
 }
