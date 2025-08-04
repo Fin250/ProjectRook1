@@ -9,7 +9,7 @@
 {% block content %}
 <section class="event-detail-section">
     <h1>{{ event.title }}</h1>
-    <img src="{{ url_for('static', filename=event.image_url) }}" alt="Event Image" class="event-detail-image">
+    <img src="{{ event.image_url }}" alt="Event Image" class="event-detail-image">
     <p><strong>Date:</strong> {{ event.date.strftime('%A, %d %B %Y') }}</p>
     <p><strong>Time:</strong> {{ event.time.strftime('%I:%M %p').lstrip('0') }}</p>
     {% if event.bands %}

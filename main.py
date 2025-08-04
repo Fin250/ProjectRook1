@@ -6,6 +6,7 @@ from flask import (
     url_for,
     flash,
     session,
+    send_from_directory,
 )
 from flask_sqlalchemy import SQLAlchemy
 from flask_bcrypt import Bcrypt
@@ -27,7 +28,7 @@ load_dotenv()
 
 app = Flask(__name__)
 app.secret_key = os.environ.get("SECRET_KEY", "fallbacksecret")
-app.config["UPLOAD_FOLDER"] = "static/uploads"
+app.config["UPLOAD_FOLDER"] = os.path.join("instance", "uploads")
 app.config["ALLOWED_EXTENSIONS"] = {"png", "jpg", "jpeg", "gif","webp"}
 app.config["SQLALCHEMY_DATABASE_URI"] = "sqlite:///site.db"
 app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
@@ -104,7 +105,7 @@ def process_image(file_storage, upload_folder):
     with open(save_path, "wb") as f:
         f.write(final_data)
 
-    return f"uploads/{final_filename}"
+    return url_for("uploaded_file", filename=final_filename)
 
 @app.route("/")
 def home():
@@ -347,6 +348,10 @@ def update_podcast():
             flash("Please enter a valid YouTube URL.", "danger")
 
     return render_template("update_podcast.html", current_url=current_url)
+
+@app.route("/uploads/<filename>")
+def uploaded_file(filename):
+    return send_from_directory(app.config["UPLOAD_FOLDER"], filename)
 
 @app.errorhandler(404)
 def page_not_found(error):
