@@ -9,7 +9,7 @@
 {% block content %}
 <section class="past-events">
     <h2>Past Events</h2>
-    <div class="events-grid">
+    <div class="events-grid {% if events|length == 0 %}no-events{% endif %}">
         {% for event in events %}
         <a href="{{ url_for('event_detail', event_id_title=event.id ~ '-' ~ event.title|replace(' ', '-') ) }}">
             <div class="event-card">
@@ -22,7 +22,9 @@
             </div>
         </a>
         {% else %}
-        <p>No past events to display.</p>
+        <div class="no-events-message">
+            <p>No past events to display.</p>
+        </div>
         {% endfor %}
     </div>
 </section>

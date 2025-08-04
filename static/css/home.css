@@ -214,6 +214,20 @@
     letter-spacing: 1px;
 }
 
+.no-events-message {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 300px;
+    font-size: 1.4rem;
+    color: #faa400;
+}
+
+.events-grid.no-events {
+    display: block;
+    padding: 0;
+}
+
 @media (max-width: 1024px) {
     .events-grid {
         grid-template-columns: repeat(2, 1fr);
