@@ -104,7 +104,7 @@
 }
 
 .event-title {
-    font-size: 2.4rem;
+    font-size: 1.6rem;
     font-weight: bold;
     margin: 5px 0;
     color: #ec220c;
@@ -245,7 +245,7 @@
     }
 
     .event-title {
-        font-size: 1.8rem;
+        font-size: 1rem;
     }
 
     .venue-description h2,
