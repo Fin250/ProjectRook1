@@ -350,6 +350,7 @@ def update_podcast():
     return render_template("update_podcast.html", current_url=current_url)
 
 @app.route("/uploads/<filename>")
+@limiter.exempt
 def uploaded_file(filename):
     return send_from_directory(app.config["UPLOAD_FOLDER"], filename)
 

@@ -64,10 +64,10 @@
 }
 
 .events-grid {
-    font-family: 'Alike Angular', serif;
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-    gap: 25px;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+    padding: 20px;
 }
 
 .event-card {
@@ -370,6 +370,12 @@
     filter: brightness(0) invert(1);
 }
 
+@media (max-width: 1024px) {
+    .events-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
 @media (max-width: 900px) {
     .admin-action-btn {
         width: 48%;
@@ -388,6 +394,13 @@
         width: 90%;
         min-width: 0;
         max-width: 100%;
+    }
+}
+
+@media (max-width: 640px) {
+    .events-grid {
+        grid-template-columns: 1fr;
+        padding: 10px;
     }
 }
 
