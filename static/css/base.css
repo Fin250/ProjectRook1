@@ -333,3 +333,29 @@ footer .footer-section.tot::after {
         padding: 4px 6px;
     }
 }
+
+@media (max-width: 400px) {
+
+    header {
+        justify-content: flex-start;
+        gap: 20px;
+        flex-wrap: wrap;
+    }
+
+    header nav ul {
+        justify-content: flex-start;
+    }
+
+    header .logo {
+        flex: 0 0 auto;
+    }
+
+    header nav {
+        flex: 1;
+    }
+
+    header nav ul li a {
+        font-size: 0.6rem;
+        padding: 2px 3px;
+    }
+}

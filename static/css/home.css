@@ -249,3 +249,13 @@
         font-size: 0.9rem;
     }
 }
+
+@media (max-width: 400px) {
+    .venue-description h2 {
+        font-size: 1.6rem;
+    }
+
+    .venue-description h2, .upcoming-events h2 {
+        font-size: 1.6rem;
+    }
+}
