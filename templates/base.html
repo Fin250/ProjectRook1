@@ -12,7 +12,7 @@
 
     <meta property="og:title" content="BuNker11 - Live Music and Events">
     <meta property="og:description" content="Discover upcoming gigs and explore past events at BuNker11.">
-    <meta property="og:image" content="{{ url_for('static', filename='images/og-image.jpg') }}">
+    <meta property="og:image" content="{{ url_for('static', filename='images/og-image.jpg', _external=True) }}">
     <meta property="og:url" content="{{ request.url }}">
     <meta property="og:type" content="website">
 
@@ -33,7 +33,7 @@
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="BuNker11 - Live Music and Events">
     <meta name="twitter:description" content="Discover upcoming gigs and explore past events at BuNker11.">
-    <meta name="twitter:image" content="{{ url_for('static', filename='images/og-image.jpg') }}">
+    <meta name="twitter:image" content="{{ url_for('static', filename='images/og-image.jpg', _external=True) }}">
 
     <title>{% block title %}BuNker11 - Live Music and Events{% endblock %}</title>
 
