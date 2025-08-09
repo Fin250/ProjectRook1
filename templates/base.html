@@ -3,19 +3,43 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link rel="canonical" href="{{ request.url }}">
+
     <meta name="description" content="BuNker11 (BN11) - Showcasing live gigs, events, and performances. Stay updated with upcoming events and explore past gigs.">
     <meta name="keywords" content="BuNker11, BN11, live music, gigs, events, performances, Colm, Harry, music venue">
     <meta name="author" content="BuNker11">
+
     <meta property="og:title" content="BuNker11 - Live Music and Events">
     <meta property="og:description" content="Discover upcoming gigs and explore past events at BuNker11.">
-    <meta property="og:image" content="{{ url_for('static', filename='images/og-image.jpg') }}">
+    <meta property="og:image" content="{{ url_for('static', filename='images/slideshow/jpg/slideshow1.jpg') }}">
     <meta property="og:url" content="{{ request.url }}">
+    <meta property="og:type" content="website">
+
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Organization",
+      "name": "BuNker11",
+      "url": "https://bunker11.co.uk", 
+      "sameAs": [
+        "https://www.facebook.com/p/TOT-Presents-100083193887876/",
+        "https://www.instagram.com/totpresents/",
+        "https://www.youtube.com/channel/UCDvFWE_kn242G_JzyuC_StA"
+      ]
+    }
+    </script>
+
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="BuNker11 - Live Music and Events">
     <meta name="twitter:description" content="Discover upcoming gigs and explore past events at BuNker11.">
     <meta name="twitter:image" content="{{ url_for('static', filename='images/og-image.jpg') }}">
+
     <title>{% block title %}BuNker11 - Live Music and Events{% endblock %}</title>
-    
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" crossorigin>
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
     <link rel="stylesheet" href="{{ url_for('static', filename='css/base.css') }}">
     <link rel="preload" href="{{ url_for('static', filename='fonts/alike-angular-v26-latin-regular.woff2') }}" as="font" type="font/woff2" crossorigin="anonymous">
 
