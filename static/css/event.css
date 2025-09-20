@@ -20,8 +20,7 @@
 .event-detail-image {
     width: 100%;
     max-width: 500px;
-    height: auto;
-    aspect-ratio: 1.5 / 1;
+    height: 100%;
     object-fit: cover;
     border-radius: 8px;
     margin-bottom: 28px;
