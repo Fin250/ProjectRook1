@@ -40,7 +40,7 @@
                 <h3 class="event-title">{{ event.title }}</h3>
                 <div class="spacer"></div>
             </div>
-            <p class="event-datetime">{{ event.date.strftime('%I:%M %p').lstrip('0') }} - {{ event.formatted_date }}</p>
+            <p class="event-datetime">{{ event.time.strftime('%I:%M %p').lstrip('0') }} - {{ event.formatted_date }}</p>
             <div class="event-bottom">
                 <div class="event-countdown">
                     <span class="countdown-text" data-date="{{ event.date }}"></span>
